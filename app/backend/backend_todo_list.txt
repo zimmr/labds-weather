@@ -1,0 +1,25 @@
+Back End TO DO List
+
+* Criar e rodar api
+* Criar classes de modelos
+* Criar service para conectar com a OpenWeather
+* Criar repositório mock
+* Definir e criar endpoints
+    * geo / procurar cidade
+    * consultar clima
+    * buscar estatísticas de consultas
+    * usuário
+        * login / autenticação
+        * cadastro
+        * editar dados
+        * excluir conta 
+        * usuário/favoritos
+            * listar
+            * salvar
+            * atualizar
+            * excluir
+        * usuário/preferencias
+            * celsius
+        * usuário/histórico
+            * listar
+            * excluir
