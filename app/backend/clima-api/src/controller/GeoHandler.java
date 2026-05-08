@@ -1,9 +1,11 @@
 package controller;
 
 import java.nio.charset.StandardCharsets;
+
 import com.sun.net.httpserver.HttpServer;
 
 import services.OpenWeatherApiService;
+import utils.JsonUtils;
 
 public class GeoHandler {
 
@@ -33,13 +35,8 @@ public class GeoHandler {
                     }
                 }
 
-                // TODO: chamar api de geolocalização
                 var response = openWeatherApiService.buscarCidade(city);
-                System.out.println("feito.");
-                // TODO: mapear retorno
-                
-                String responseMessage = "Tempo agora em "+city+": 19°C";
-                byte[] resposta = responseMessage.getBytes(StandardCharsets.UTF_8);
+                byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
                 
                 exchange.sendResponseHeaders(200, resposta.length);
                 exchange.getResponseBody().write(resposta);

@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "app\\backend\\clima-api\\src"
+    ],
+    "java.project.referencedLibraries": [
+        "app\\backend\\clima-api\\lib\\gson-2.14.0.jar"
+    ]
+}

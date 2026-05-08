@@ -1,0 +1,1 @@
+javac -cp "lib\gson-2.14.0.jar" -d out (Get-ChildItem -Recurse -Filter "*.java" src\ | % { $_.FullName })

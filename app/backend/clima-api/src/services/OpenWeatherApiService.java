@@ -1,12 +1,16 @@
 package services;
 
-import model.dtos.CityDto;
-
-import java.net.*;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Scanner;
+
+import model.dtos.CityDto;
+import utils.JsonUtils;
 
 public class OpenWeatherApiService {
 
@@ -18,26 +22,19 @@ public class OpenWeatherApiService {
     public List<CityDto> buscarCidade(String cidade) {
 
         try {
-            URL url = new URL(BaseUrl + "geo/1.0/direct?q=" + cidade + "&limit=5&appid=" + ApiKey);
+            // TODO: abstrair tratamento da string
+            String cidadeString = URLEncoder.encode(cidade, StandardCharsets.UTF_8);
+
+            // TODO: abstrair
+            String path = BaseUrl + "geo/1.0/direct?q=" + cidadeString + "&limit=5&appid=" + ApiKey;
+
+            URL url = URI.create(path).toURL();
+            
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            Scanner sc = new Scanner(conn.getInputStream(), "UTF-8");
-            // String json = "";
-
-            // while (sc.hasNext()) 
-            // {
-            //     json += sc.nextLine();
-            // }
+            var json = getJsonFromStream(conn);
             
-            // sc.close();
-            // System.out.print(json);
-            
-            // String temp = extrairNumero(json, "\"temp_C\":");
-            // String desc = extrairTexto(json, "\"value\": \"");
-
-            // return new Clima(cidade, temp, desc);
-            
-            return null; // TODO: alterar
+            return JsonUtils.deserializeList(json, CityDto.class);
 
         } catch (Exception e) {
             System.out.println("erro:" + e.getMessage());
@@ -45,21 +42,15 @@ public class OpenWeatherApiService {
         }
     }
 
-    // private String extrairNumero(String json, String chave) {
-    //     try {
-    //         int i = json.indexOf(chave) + chave.length();
-    //         return json.substring(i, json.indexOf(",", i)).trim();
-    //     } catch (Exception e) {
-    //         return "N/A";
-    //     }
-    // }
+    private String getJsonFromStream(HttpURLConnection conn) throws IOException {
+        Scanner sc = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8);
+        StringBuilder json = new StringBuilder();
+        
+        while (sc.hasNextLine()) {
+            json.append(sc.nextLine());
+        }
+        sc.close();
 
-    // private String extrairTexto(String json, String chave) {
-    //     try {
-    //         int i = json.indexOf(chave) + chave.length();
-    //         return json.substring(i, json.indexOf("\"", i));
-    //     } catch (Exception e) {
-    //         return "N/A";
-    //     }
-    // }
+        return json.toString();
+    }
 }
