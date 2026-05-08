@@ -3,12 +3,16 @@ package controller;
 import java.nio.charset.StandardCharsets;
 import com.sun.net.httpserver.HttpServer;
 
-public class WeatherHandler {
+import services.OpenWeatherApiService;
 
-    public WeatherHandler() {    }
+public class GeoHandler {
+
+    private OpenWeatherApiService openWeatherApiService = new OpenWeatherApiService();
+
+    public GeoHandler() {}
 
     public void create(HttpServer server) {
-        String basePath = "/weather";
+        String basePath = "/geo";
 
         // TODO: alterar e criar métodos
         // TODO: dá pra criar BaseHandler com os métodos genéricos
@@ -24,14 +28,16 @@ public class WeatherHandler {
                 for (String param : queryParams) {
                     var paramValuePair = param.split("=");
                     if (paramValuePair[0].equalsIgnoreCase("city"))
-                        {
-                            city = paramValuePair[1];
-                        }
-                    };
+                    {
+                        city = paramValuePair[1];
+                    }
+                }
 
                 // TODO: chamar api de geolocalização
+                var response = openWeatherApiService.buscarCidade(city);
+                System.out.println("feito.");
                 // TODO: mapear retorno
-                    
+                
                 String responseMessage = "Tempo agora em "+city+": 19°C";
                 byte[] resposta = responseMessage.getBytes(StandardCharsets.UTF_8);
                 
