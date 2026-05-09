@@ -1,18 +1,17 @@
 package services;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Scanner;
-
 import model.dtos.CityDto;
 import utils.JsonUtils;
 
-public class OpenWeatherApiService {
+// TODO: criar interface
+// TODO: criar base service ??
+public class OpenWeatherApiService extends BaseService {
 
     // "https://api.openweathermap.org/data/2.5/weather?lat=-29.9202596&lon=-51.18361&appid={{apiKey}}&units=metric"
     private String BaseUrl = "http://api.openweathermap.org/";
@@ -40,17 +39,5 @@ public class OpenWeatherApiService {
             System.out.println("erro:" + e.getMessage());
             return null;
         }
-    }
-
-    private String getJsonFromStream(HttpURLConnection conn) throws IOException {
-        Scanner sc = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8);
-        StringBuilder json = new StringBuilder();
-        
-        while (sc.hasNextLine()) {
-            json.append(sc.nextLine());
-        }
-        sc.close();
-
-        return json.toString();
     }
 }
