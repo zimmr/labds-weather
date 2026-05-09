@@ -1,10 +1,14 @@
 # labds-weather
 
-Laboratório de Desenvolvimento de Software - IFRS Canoas
+**Laboratório de Desenvolvimento de Software - IFRS Canoas**
+
+Aplicação de consulta de dados meteorológicos, usando a OpenWeather API: https://openweathermap.org/api
 
 ----
 
 ## Backend
+Desenvolvido em Java.
+
 ### Dependências
 Baixar .jar e salvar no diretório /lib
 * Gson 2.14.0 https://mvnrepository.com/artifact/com.google.code.gson/gson/2.14.0
