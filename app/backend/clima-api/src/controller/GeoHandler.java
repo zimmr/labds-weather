@@ -18,7 +18,7 @@ public class GeoHandler {
     public void create(HttpServer server) {
         String basePath = "/geo";
 
-        // TODO: alterar e criar métodos
+        // TODO: abstrair métodos GET e POST
         // TODO: dá pra criar BaseHandler com os métodos genéricos
         server.createContext(basePath, exchange -> {
 
