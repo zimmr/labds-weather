@@ -4,14 +4,16 @@ import java.nio.charset.StandardCharsets;
 
 import com.sun.net.httpserver.HttpServer;
 
-import services.OpenWeatherApiService;
+import services.IGeoApiService;
 import utils.JsonUtils;
 
 public class GeoHandler {
 
-    private OpenWeatherApiService openWeatherApiService = new OpenWeatherApiService();
+    private final IGeoApiService geoApiService;
 
-    public GeoHandler() {}
+    public GeoHandler(IGeoApiService geoApiService) {
+        this.geoApiService = geoApiService;
+    }
 
     public void create(HttpServer server) {
         String basePath = "/geo";
@@ -35,7 +37,7 @@ public class GeoHandler {
                     }
                 }
 
-                var response = openWeatherApiService.buscarCidade(city);
+                var response = geoApiService.buscarCidade(city);
                 byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
                 
                 exchange.sendResponseHeaders(200, resposta.length);

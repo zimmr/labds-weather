@@ -11,12 +11,9 @@ import utils.JsonUtils;
 
 // TODO: criar interface
 // TODO: criar base service ??
-public class OpenWeatherApiService extends BaseService {
+public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiService {
 
-    // "https://api.openweathermap.org/data/2.5/weather?lat=-29.9202596&lon=-51.18361&appid={{apiKey}}&units=metric"
-    private String BaseUrl = "http://api.openweathermap.org/";
-    private String geoDomain = "geo/1.0/";
-    private String ApiKey = "51bc103d2f82205d5f7fc5edc7a5a921";
+    private String geoDomain = baseUrl + "geo/1.0/";
 
     public List<CityDto> buscarCidade(String cidade) {
 
@@ -25,7 +22,7 @@ public class OpenWeatherApiService extends BaseService {
             String cidadeString = URLEncoder.encode(cidade, StandardCharsets.UTF_8);
 
             // TODO: abstrair
-            String path = BaseUrl + "geo/1.0/direct?q=" + cidadeString + "&limit=5&appid=" + ApiKey;
+            String path = geoDomain + "direct?q=" + cidadeString + "&limit=5&appid=" + apiKey;
 
             URL url = URI.create(path).toURL();
             

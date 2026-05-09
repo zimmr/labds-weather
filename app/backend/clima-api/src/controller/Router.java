@@ -2,15 +2,20 @@ package controller;
 
 import com.sun.net.httpserver.HttpServer;
 
+import services.IGeoApiService;
+
 public class Router {
     
-    private WeatherHandler _weatherHandler = new WeatherHandler();
-    private GeoHandler _geoHandler = new GeoHandler();
+    private WeatherHandler weatherHandler;
+    private GeoHandler geoHandler;
 
-    public Router() { }
+    public Router(IGeoApiService geoApiService) {
+        geoHandler = new GeoHandler(geoApiService);
+        weatherHandler = new WeatherHandler();
+    }
 
     public void createContext(HttpServer server) {
-        _weatherHandler.create(server);
-        _geoHandler.create(server);
+        weatherHandler.create(server);
+        geoHandler.create(server);
     }
 }
