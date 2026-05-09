@@ -1,8 +1,5 @@
 package services;
 
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -36,11 +33,9 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
             }
             
             // Regra 4.3 - Cache inteligente: •se não → chamar API
-            String path = geoDomain + "direct?q=" + city + "&limit=5&appid=" + apiKey;    
-            URL url = URI.create(path).toURL();
-            
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            var result = JsonUtils.deserializeList(getJsonFromStream(conn), CityDto.class);
+            String path = geoDomain + "direct?q=" + city + "&limit=5&appid=" + apiKey;
+
+            var result = JsonUtils.deserializeList(sendRequest(path), CityDto.class);
                 
             // Regra 2.2 - Controle de duplicidade: Não salvar se já existir registro
             // Regra 2.4 - Controle de duplicidade: Impedir duplicação na lista
