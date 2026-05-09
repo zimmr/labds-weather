@@ -6,11 +6,13 @@ import java.nio.charset.StandardCharsets;
 import com.sun.net.httpserver.HttpServer;
 
 import model.dtos.request.GeoRequest;
+import model.dtos.validation.GeoRequestValidator;
 import services.IGeoApiService;
 
 public class GeoHandler extends BaseHandler {
 
     private final IGeoApiService geoApiService;
+    private final GeoRequestValidator geoRequestValidator = new GeoRequestValidator();
 
     public GeoHandler(IGeoApiService geoApiService) {
         this.geoApiService = geoApiService;
@@ -24,7 +26,7 @@ public class GeoHandler extends BaseHandler {
                 
                 switch (method) {
                     case "GET":
-                        get(exchange, GeoRequest.class, geoApiService::searchByName);
+                        get(exchange, GeoRequest.class, geoApiService::searchByName, geoRequestValidator::validate);
                         break;
                     case "POST":
                         exchange.sendResponseHeaders(405, -1);
