@@ -2,8 +2,9 @@ package services;
 
 import java.util.List;
 
-import model.dtos.CityDto;
+import model.dtos.request.GeoRequest;
+import model.dtos.response.CityDto;
 
 public interface IGeoApiService {
-    public List<CityDto> buscarCidade(String cidade);
+    public List<CityDto> searchByName(GeoRequest request);
 }

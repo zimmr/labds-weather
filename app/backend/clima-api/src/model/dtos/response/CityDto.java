@@ -1,4 +1,4 @@
-package model.dtos;
+package model.dtos.response;
 
 public class CityDto {
     public String name;

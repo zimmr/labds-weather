@@ -6,7 +6,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
 import model.dtos.CityDto;
+import model.dtos.request.GeoRequest;
 import utils.JsonUtils;
 
 // TODO: criar interface
@@ -15,11 +17,11 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
 
     private String geoDomain = baseUrl + "geo/1.0/";
 
-    public List<CityDto> buscarCidade(String cidade) {
+    public List<CityDto> searchByName(GeoRequest request) {
 
         try {
             // TODO: abstrair tratamento da string
-            String cidadeString = URLEncoder.encode(cidade, StandardCharsets.UTF_8);
+            String cidadeString = URLEncoder.encode(request.city, StandardCharsets.UTF_8);
 
             // TODO: abstrair
             String path = geoDomain + "direct?q=" + cidadeString + "&limit=5&appid=" + apiKey;
