@@ -28,18 +28,6 @@ public class GeoHandler extends BaseHandler {
                     case "GET":
                         get(exchange, GeoRequest.class, geoApiService::searchByName, geoRequestValidator::validate);
                         break;
-                    case "POST":
-                        exchange.sendResponseHeaders(405, -1);
-                        exchange.close();
-                        break;
-                    case "PUT":
-                        exchange.sendResponseHeaders(405, -1);
-                        exchange.close();
-                        break;
-                    case "DELETE":
-                        exchange.sendResponseHeaders(405, -1);
-                        exchange.close();
-                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();
