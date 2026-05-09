@@ -12,12 +12,6 @@ import model.dtos.response.ErrorResponse;
 import utils.JsonUtils;
 
 public class BaseHandler {
-    
-    protected void setResponse(HttpExchange exchange, int statusCode, byte[] resposta) throws IOException {
-        exchange.sendResponseHeaders(statusCode, resposta.length);
-        exchange.getResponseBody().write(resposta);
-        exchange.getResponseBody().close();
-    }
 
     // Método GET
     protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Function<TRequest, TResponse> action) throws IOException {
@@ -49,8 +43,12 @@ public class BaseHandler {
     // TODO: Método POST
     // ...
     //
+   
+    // TODO: método para obter parâmetros de headers
+    // ...
+    //    
 
-    protected <T> T GetQueryParams(String query, Class<T> classType)
+    private <T> T GetQueryParams(String query, Class<T> classType)
     {
         try {
             Map<String, Object> queryParamsMap = new HashMap<String, Object>();
@@ -59,20 +57,35 @@ public class BaseHandler {
 
             for (String param : queryParams) {
                 var paramValuePair = param.split("=");
-                queryParamsMap.put(paramValuePair[0], paramValuePair[1]);
+                
+                var key = getValueFromArray(paramValuePair, 0);
+                var value = getValueFromArray(paramValuePair, 1);
+
+                if (key != null)
+                    queryParamsMap.put(key.toString(), value);
             }
 
             String queryParamsJson = JsonUtils.toJson(queryParamsMap);
+            System.out.println(queryParamsJson);
             return JsonUtils.deserialize(queryParamsJson, classType);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-        
-        
-    // TODO: método para obter parâmetros de headers
-    // ...
-    //
 
+    private Object getValueFromArray(String[] paramValuePair, int index)
+    {
+        try {
+            return paramValuePair[index];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private void setResponse(HttpExchange exchange, int statusCode, byte[] resposta) throws IOException {
+        exchange.sendResponseHeaders(statusCode, resposta.length);
+        exchange.getResponseBody().write(resposta);
+        exchange.getResponseBody().close();
+    }
 }
