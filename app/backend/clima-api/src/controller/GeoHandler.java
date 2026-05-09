@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
 import com.sun.net.httpserver.HttpServer;
 
 import model.dtos.request.GeoRequest;
@@ -17,32 +20,29 @@ public class GeoHandler extends BaseHandler {
         String basePath = "/geo";
 
         server.createContext(basePath, exchange -> {
-
-            var method = exchange.getRequestMethod().toUpperCase();
-            
-            switch (method) {
-                case "GET":
-                    get(exchange, GeoRequest.class, geoApiService::searchByName);
-                    break;
-                case "POST":
-                    exchange.sendResponseHeaders(405, -1);
-                    exchange.close();
-                    break;
-                case "PUT":
-                    exchange.sendResponseHeaders(405, -1);
-                    exchange.close();
-                    break;
-                case "DELETE":
-                    exchange.sendResponseHeaders(405, -1);
-                    exchange.close();
-                    break;
-                default:
-                    exchange.sendResponseHeaders(405, -1);
-                    exchange.close();
-                    break;
-            }
-            
-            return;
+                var method = exchange.getRequestMethod().toUpperCase();
+                
+                switch (method) {
+                    case "GET":
+                        get(exchange, GeoRequest.class, geoApiService::searchByName);
+                        break;
+                    case "POST":
+                        exchange.sendResponseHeaders(405, -1);
+                        exchange.close();
+                        break;
+                    case "PUT":
+                        exchange.sendResponseHeaders(405, -1);
+                        exchange.close();
+                        break;
+                    case "DELETE":
+                        exchange.sendResponseHeaders(405, -1);
+                        exchange.close();
+                        break;
+                    default:
+                        exchange.sendResponseHeaders(405, -1);
+                        exchange.close();
+                        break;
+                }
         });
     }
 }

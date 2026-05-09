@@ -11,13 +11,12 @@ public class JsonUtils {
 
     private static Gson gson = new Gson();
 
-    public static <T> T deserialize(String json, Class<T> typeCLass) {
-        Type type = new TypeToken<T>(){}.getType();
-        return gson.fromJson(json, type);
+    public static <T> T deserialize(String json, Class<T> classType) {
+        return gson.fromJson(json, classType);
     }
     
-    public static <T> List<T> deserializeList(String json, Class<T> typeClass) {
-        Type tipo = TypeToken.getParameterized(List.class, typeClass).getType();
+    public static <T> List<T> deserializeList(String json, Class<T> classType) {
+        Type tipo = TypeToken.getParameterized(List.class, classType).getType();
         return gson.fromJson(json, tipo);
     }
 

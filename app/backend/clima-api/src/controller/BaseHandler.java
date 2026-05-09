@@ -29,11 +29,13 @@ public class BaseHandler {
         setResponse(exchange, 200, resposta);
     }
 
-    // Método POST
+    // TODO: Método POST
+    // ...
+    //
 
     protected <T> T GetQueryParams(String query, Class<T> classType)
     {
-        Map<String, Object> queryParamsMap = new HashMap();
+        Map<String, Object> queryParamsMap = new HashMap<String, Object>();
 
         String[] queryParams = query.split("&");
 
@@ -48,5 +50,7 @@ public class BaseHandler {
         
         
     // TODO: método para obter parâmetros de headers
+    // ...
+    //
 
 }
