@@ -1,32 +1,64 @@
 package model;
 
-// TODO: passar variáveis para camelCase, conforma padrão do Java
+import java.util.UUID;
+
 // TODO: talvez mover para uma pasta "entities"
-// TODO: criar métodos
 public class User {
-    private String Id;
-    private String Name;
-    private String Email;
-    private String Password;
-    private boolean Celsius;
+    private String id;
+    private String name;
+    private String email;
+    private String password;
+    private boolean celsius;
     // TODO: histórico
     // TODO: favoritos
-    // TODO: gets e sets
     // TODO: outros métodos
 
-    public User(String id, String name, String email, String password, boolean celsius) {
-        Id = id;
-        Name = name;
-        Email = email;
-        Password = password;
-        Celsius = celsius;
+    public User(String name, String email, String password, boolean celsius) {
+        this.id =  UUID.randomUUID().toString();
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.celsius = celsius;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isCelsius() {
+        return celsius;
+    }
+
+    public void setCelsius(boolean celsius) {
+        this.celsius = celsius;
+    }
+    
 }

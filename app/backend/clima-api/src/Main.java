@@ -1,6 +1,10 @@
 import com.sun.net.httpserver.HttpServer;
 import controller.Router;
+import repositories.IUserRepository;
+import repositories.MockUserRepository;
 import services.IGeoApiService;
+import services.IUserService;
+import services.UserService;
 import services.CurrentWeatherApiService;
 import services.GeoApiService;
 import services.ICurrentWeatherApiService;
@@ -18,7 +22,11 @@ public class Main {
         // Dependências
         IGeoApiService geoApiService = new GeoApiService();
         ICurrentWeatherApiService currentWeatherApiService = new CurrentWeatherApiService();
-        router = new Router(geoApiService, currentWeatherApiService);
+        
+        IUserRepository userRepository = new MockUserRepository();
+        IUserService userService = new UserService(userRepository);
+
+        router = new Router(geoApiService, currentWeatherApiService, userService);
 
         router.createContext(server);
 
