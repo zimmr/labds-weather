@@ -31,11 +31,13 @@ com todos os dados tratados.
 * POST user                                           [V]
 Rota de cadastro do usuário.
 A rota está criada, falta implementar as validações necessárias.
+A service está usando um repositório mock.
 Não deve permitir caso os headers já estejam preenchidos com dados de autenticação.
 Deve autenticar e já retornar os dados de autenticação para manter o usuário logado.
 * GET user                                            [V]
 Retorna dados do usuário.
 Rota criada.
+A service está usando um repositório mock.
 Falta Autenticar.
 * PUT user                                            [ ]
 Atualiza dados do usuário.

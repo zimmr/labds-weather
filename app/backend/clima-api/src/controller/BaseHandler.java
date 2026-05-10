@@ -59,8 +59,7 @@ public class BaseHandler {
         }
     }
 
-    // TODO: Método PUT
-    // TODO: Método DELETE
+    // TODO: Provavelmente não vai precisar de métodos específicos para PUT e DELETE, podemos usar o de POST, recebendo os parâmetros todos pelo body
 
     private <TRequest> TRequest getRequestBody(Class<TRequest> requestClass, InputStream inputStream) {
         String json = JsonUtils.getJsonFromStream(inputStream);
