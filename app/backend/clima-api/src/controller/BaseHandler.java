@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,23 +16,25 @@ import utils.JsonUtils;
 public class BaseHandler {
 
     // Método GET
-    protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action) throws Exception {
-        try {
-            var query = exchange.getRequestURI().getQuery();
-            var request = GetQueryParams(query, requestClass);
+    // TODO: remover se não precisar
+    // protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action) throws Exception {
+    //     try {
+    //         var query = exchange.getRequestURI().getQuery();
+    //         var request = getQueryParams(query, requestClass);
     
-            var response = action.execute(request);
-            handleSuccess(exchange, response);
-        } catch (Exception e) {
-            handleError(exchange, e);
-        }
-    }
+    //         var response = action.execute(request);
+    //         handleSuccess(exchange, response);
+    //     } catch (Exception e) {
+    //         handleError(exchange, e);
+    //     }
+    // }
 
     // Método GET com validação
+    // Deixando este método apenas para sempre obrigar a passar uma validação
     protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {
         try {
             var query = exchange.getRequestURI().getQuery();
-            var request = GetQueryParams(query, requestClass);
+            var request = getQueryParams(query, requestClass);
 
             var validationError = validation.apply(request);
             if (validationError != null)
@@ -40,6 +43,8 @@ public class BaseHandler {
                 return;
             }
 
+            // TODO: try get headers
+
             TResponse response = action.execute(request);
             handleSuccess(exchange, response);
         } catch (Exception e) {
@@ -47,15 +52,36 @@ public class BaseHandler {
         }
     }
 
-    // TODO: Método POST
-    // ...
-    //
+    // Método POST
+    protected <TRequest, TResponse> void post(HttpExchange exchange, Class<TRequest> requestClass, Function<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {
+        InputStream inputStream = exchange.getRequestBody();
+        TRequest requestBody = getRequestBody(requestClass, inputStream);
+        
+        var validationError = validation.apply(requestBody);
+        if (validationError != null)
+        {
+            setResponse(exchange, 400, JsonUtils.toJson(validationError).getBytes(StandardCharsets.UTF_8));
+            return;
+        }
+
+        // TODO: try get headers
+
+        TResponse response = action.apply(requestBody);
+        byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
+        setResponse(exchange, 200, resposta);
+    }
+
+    private <TRequest> TRequest getRequestBody(Class<TRequest> requestClass, InputStream inputStream) {
+        String json = JsonUtils.getJsonFromStream(inputStream);
+        TRequest requestBody = JsonUtils.deserialize(json, requestClass);
+        return requestBody;
+    }
    
     // TODO: método para obter parâmetros de headers
     // ...
     //    
 
-    private <T> T GetQueryParams(String query, Class<T> classType)
+    private <T> T getQueryParams(String query, Class<T> classType)
     {
         try {
             Map<String, Object> queryParamsMap = new HashMap<String, Object>();
@@ -66,6 +92,9 @@ public class BaseHandler {
                 var paramValuePair = param.split("=");
                 
                 var key = getValueFromArray(paramValuePair, 0);
+                if (key == "headers") // TODO: validação que talvez faça sentido no futuro
+                    continue;
+
                 var value = getValueFromArray(paramValuePair, 1);
 
                 if (key != null)
@@ -73,7 +102,6 @@ public class BaseHandler {
             }
 
             String queryParamsJson = JsonUtils.toJson(queryParamsMap);
-            System.out.println(queryParamsJson);
             return JsonUtils.deserialize(queryParamsJson, classType);
         } catch (Exception e) {
             e.printStackTrace();

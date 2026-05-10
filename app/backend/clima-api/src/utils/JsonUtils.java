@@ -1,10 +1,14 @@
 package utils;
 
 import java.util.List;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 
 
 public class JsonUtils {
@@ -22,5 +26,16 @@ public class JsonUtils {
 
     public static String toJson(Object objeto) {
         return gson.toJson(objeto);
+    }
+
+    public static String getJsonFromStream(InputStream inputStream) {
+        Scanner sc = new Scanner(inputStream, StandardCharsets.UTF_8);
+        StringBuilder json = new StringBuilder();
+        
+        while (sc.hasNextLine())
+            json.append(sc.nextLine());
+
+        sc.close();
+        return json.toString();
     }
 }
