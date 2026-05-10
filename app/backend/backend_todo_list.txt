@@ -3,10 +3,14 @@ Back End TO DO List
 * Criar e ajustar classes de modelos
 
 * Criar repositórios e conectar com o banco
-  * ILogRepository
-  * IUserRepository
-  * LogRepository
-  * UserRepository
+** ILogRepository
+Criada, implementar métodos necessários.
+
+** IUserRepository
+Criada, implementar métodos necessários.
+
+** LogRepository
+** UserRepository
 
 ########################## ENDPOINTS ####################
 
@@ -14,7 +18,8 @@ Back End TO DO List
 Tratar retorno para evitar redundâncias ??
 
 * GET weather/current                                 [V]
-Tratar retorno das unidades de medida.
+Falta tratar retorno das unidades de medida.
+Tratar outros dados, descrição, etc.
 A temperatura vem em Kelvin, devemos converter para Fahrenheit e Celsius.
 
 * GET weather/forecast                                [ ]
@@ -23,12 +28,15 @@ A ideia é combinar as duas consultas em um retorno único,
 com todos os dados tratados.
 
 
-* POST user                                           [ ]
-Rota de cadastro do usuário. Deve fazer todas as validações necessárias.
+* POST user                                           [V]
+Rota de cadastro do usuário.
+A rota está criada, falta implementar as validações necessárias.
 Não deve permitir caso os headers já estejam preenchidos com dados de autenticação.
-* GET user                                            [ ]
+Deve autenticar e já retornar os dados de autenticação para manter o usuário logado.
+* GET user                                            [V]
 Retorna dados do usuário.
-Autenticar.
+Rota criada.
+Falta Autenticar.
 * PUT user                                            [ ]
 Atualiza dados do usuário.
 Recebe dados pelo corpo da requisição, atualiza somente os que não estiverem vazios.
