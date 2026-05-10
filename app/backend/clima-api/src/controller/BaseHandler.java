@@ -8,36 +8,43 @@ import java.util.function.Function;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import controller.interfaces.Action;
 import model.dtos.response.ErrorResponse;
 import utils.JsonUtils;
 
 public class BaseHandler {
 
     // Método GET
-    protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Function<TRequest, TResponse> action) throws IOException {
-        var query = exchange.getRequestURI().getQuery();
-        var request = GetQueryParams(query, requestClass);
-
-        var response = action.apply(request);
-        byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
-        setResponse(exchange, 200, resposta);
+    protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action) throws Exception {
+        try {
+            var query = exchange.getRequestURI().getQuery();
+            var request = GetQueryParams(query, requestClass);
+    
+            var response = action.execute(request);
+            handleSuccess(exchange, response);
+        } catch (Exception e) {
+            handleError(exchange, e);
+        }
     }
 
-    // Método GET
-    protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Function<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {
-        var query = exchange.getRequestURI().getQuery();
-        var request = GetQueryParams(query, requestClass);
+    // Método GET com validação
+    protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {
+        try {
+            var query = exchange.getRequestURI().getQuery();
+            var request = GetQueryParams(query, requestClass);
 
-        var validationError = validation.apply(request);
-        if (validationError != null)
-        {
-            setResponse(exchange, 400, JsonUtils.toJson(validationError).getBytes(StandardCharsets.UTF_8));
-            return;
+            var validationError = validation.apply(request);
+            if (validationError != null)
+            {
+                handleError(exchange, validationError);
+                return;
+            }
+
+            TResponse response = action.execute(request);
+            handleSuccess(exchange, response);
+        } catch (Exception e) {
+            handleError(exchange, e);
         }
-
-        var response = action.apply(request);
-        byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
-        setResponse(exchange, 200, resposta);
     }
 
     // TODO: Método POST
@@ -81,6 +88,21 @@ public class BaseHandler {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private <TResponse> void handleSuccess(HttpExchange exchange, TResponse response) throws IOException {
+        byte[] resposta = JsonUtils.toJson(response).getBytes(StandardCharsets.UTF_8);
+        setResponse(exchange, 200, resposta);
+    }
+    
+    private void handleError(HttpExchange exchange, ErrorResponse validationError) throws IOException {
+        setResponse(exchange, 400, JsonUtils.toJson(validationError).getBytes(StandardCharsets.UTF_8));
+    }
+
+    private void handleError(HttpExchange exchange, Exception e) throws IOException {
+        e.printStackTrace();
+        var errorResponse = new ErrorResponse(400, e.getMessage());
+        handleError(exchange, errorResponse);
     }
 
     private void setResponse(HttpExchange exchange, int statusCode, byte[] resposta) throws IOException {

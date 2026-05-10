@@ -1,8 +1,5 @@
 package controller;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
 import com.sun.net.httpserver.HttpServer;
 
 import model.dtos.request.GeoRequest;
@@ -23,8 +20,7 @@ public class GeoHandler extends BaseHandler {
 
         server.createContext(basePath, exchange -> {
                 var method = exchange.getRequestMethod().toUpperCase();
-                
-                switch (method) {
+                    switch (method) {
                     case "GET":
                         get(exchange, GeoRequest.class, geoApiService::searchByName, geoRequestValidator::validate);
                         break;

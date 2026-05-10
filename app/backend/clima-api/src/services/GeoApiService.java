@@ -16,8 +16,8 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
     // TODO: substituir por implementação com prazo de expiração
     private HashMap<String, List<CityDto>> cache = new HashMap<>();
     
-    public List<CityDto> searchByName(GeoRequest request) {
-        try {
+    public List<CityDto> searchByName(GeoRequest request) throws Exception {
+        // try {
             
             // Regra 1.4 Não permitir espaços inválidos   
             String city = URLEncoder.encode(request.city.trim(), StandardCharsets.UTF_8).toLowerCase();
@@ -35,18 +35,22 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
             // Regra 4.3 - Cache inteligente: •se não → chamar API
             String path = geoDomain + "direct?q=" + city + "&limit=5&appid=" + apiKey;
 
-            var result = JsonUtils.deserializeList(sendRequest(path), CityDto.class);
-                
+            var resultJson = sendRequest(path);
+            System.out.println(resultJson);
+            var result = JsonUtils.deserializeList(resultJson, CityDto.class);
+            
+            System.out.println("passou aqui");
             // Regra 2.2 - Controle de duplicidade: Não salvar se já existir registro
             // Regra 2.4 - Controle de duplicidade: Impedir duplicação na lista
             if (!cache.containsKey(city))
                 cache.put(city, result);
 
+            System.out.println("vai retornar o que?");
             return result;
 
-        } catch (Exception e) {
-            System.out.println("erro: " + e.getMessage());
-            return null;
-        }
+        // } catch (Exception e) {
+        //     System.out.println("erro: " + e.getMessage());
+        //     return null;
+        // }
     }
 }
