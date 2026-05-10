@@ -1,5 +1,7 @@
 package model.dtos.validation;
 
+import java.util.ArrayList;
+
 import model.dtos.request.GetUserRequest;
 import model.dtos.response.ErrorResponse;
 
@@ -7,9 +9,11 @@ public class GetUserRequestValidator {
 
     public ErrorResponse validate(GetUserRequest request)
     {
-        if (request == null || request.id == null || request.id.isEmpty() || request.id.isBlank())
-            return new ErrorResponse(400, "Requisição inválida: Parâmetro 'id' vazio.");
+        ArrayList<String> errors = new ArrayList<String>();
 
-        return null;
+        if (request == null || request.id == null || request.id.isEmpty() || request.id.isBlank())
+            errors.add("Parâmetro 'id' vazio.");
+
+        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida.", errors) :null;
     }
 }

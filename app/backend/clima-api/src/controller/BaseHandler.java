@@ -118,7 +118,7 @@ public class BaseHandler {
 
     private void handleError(HttpExchange exchange, Exception e) throws IOException {
         e.printStackTrace();
-        var errorResponse = new ErrorResponse(400, e.getMessage());
+        var errorResponse = new ErrorResponse(e.getMessage());
         handleError(exchange, errorResponse);
     }
 
