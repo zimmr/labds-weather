@@ -1,0 +1,149 @@
+{
+  "info": {
+    "_postman_id": "bd11e7ef-785d-402c-ba41-d3d51c5605eb",
+    "name": "Clima API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17878313"
+  },
+  "item": [
+    {
+      "name": "geo",
+      "item": [
+        {
+          "name": "Get City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/geo?city=Canoas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "geo"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Canoas"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "weather",
+      "item": [
+        {
+          "name": "Get Current Weather",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/weather/current?city=Canoas&state=Rio Grande do Sul&country=br",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "weather",
+                "current"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Canoas"
+                },
+                {
+                  "key": "state",
+                  "value": "Rio Grande do Sul"
+                },
+                {
+                  "key": "country",
+                  "value": "br"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "Post User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao@mail\",\r\n    \"senha\": \"123\",\r\n    \"celsius\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/user?id=c16117b6-3b03-4219-9602-be717cdaa523",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "user"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "c16117b6-3b03-4219-9602-be717cdaa523"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
