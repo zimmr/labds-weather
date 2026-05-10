@@ -1,7 +1,9 @@
 import com.sun.net.httpserver.HttpServer;
 import controller.Router;
 import services.IGeoApiService;
+import services.CurrentWeatherApiService;
 import services.GeoApiService;
+import services.ICurrentWeatherApiService;
 
 import java.net.InetSocketAddress;
 
@@ -15,7 +17,8 @@ public class Main {
 
         // Dependências
         IGeoApiService geoApiService = new GeoApiService();
-        router = new Router(geoApiService);
+        ICurrentWeatherApiService currentWeatherApiService = new CurrentWeatherApiService();
+        router = new Router(geoApiService, currentWeatherApiService);
 
         router.createContext(server);
 
