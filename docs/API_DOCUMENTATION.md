@@ -25,7 +25,9 @@
 ```
 
 **400 Bad Request**
+```
 {
     "code": 400,
     "Message": "Error message"
 }
+```
