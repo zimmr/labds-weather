@@ -1,13 +1,83 @@
 Back End TO DO List
 
-* Criar classes de modelos
+* Criar e ajustar classes de modelos
+
 * Criar repositórios e conectar com o banco
   * ILogRepository
   * IUserRepository
   * LogRepository
   * UserRepository
-  * etc
-* Definir e criar endpoints
+
+########################## ENDPOINTS ####################
+
+* GET geo                                             [V]
+Tratar retorno para evitar redundâncias ??
+
+* GET weather/current                                 [V]
+Tratar retorno das unidades de medida.
+A temperatura vem em Kelvin, devemos converter para Fahrenheit e Celsius.
+
+* GET weather/forecast                                [ ]
+* GET weather/combined                                [ ]
+A ideia é combinar as duas consultas em um retorno único,
+com todos os dados tratados.
+
+
+* POST user                                           [ ]
+Rota de cadastro do usuário. Deve fazer todas as validações necessárias.
+Não deve permitir caso os headers já estejam preenchidos com dados de autenticação.
+* GET user                                            [ ]
+Retorna dados do usuário.
+Autenticar.
+* PUT user                                            [ ]
+Atualiza dados do usuário.
+Recebe dados pelo corpo da requisição, atualiza somente os que não estiverem vazios.
+Validações obrigatórias para cada campo.
+Autenticar.
+* DELETE user                                         [ ]
+Exclui o usuário.
+Autenticar.
+
+* POST user/authenticate                              [ ]
+Definir como será feita a autenticação. Mas penso em um token gerado a partir do email, senha e horário de acesso.
+Esse token será recebido pelos headers de todas as requisições para as quais for necessário.
+Será validado para cada ação que precisar.
+
+** Logout poderá ser feito pelo front, apenas apagando dados do cache que seriam enviados pelo header.
+
+* POST user/favorites                                 [ ]
+Salva um novo favoritos.
+Não permitir se o usuário já possuir 3 salvos.
+Autenticar.
+* GET user/favorites                                  [ ]
+Obtém favoritos do usuário.
+Autenticar.
+* PUT user/favorites                                  [ ]
+Atualizar favoritos do usuário.
+Mesma lógica do PUT user.
+Autenticar.
+* DELETE user/favorites                               [ ]
+Exclui um favorito do usuário.
+Autenticar.
+
+* GET user/history                                    [ ]
+Lista histórico do usuário.
+Autenticar.
+* DELETE user/history                                 [ ]
+Limpa todo o histórico do usuário.
+Autenticar.
+
+* GET statistics                                      [ ]
+Lista estatísticas, baseado nos logs salvos.
+Locais mais buscados de todos os tempos.
+Do último ano, do último mês, da última semana.
+Pode trazer tudo em uma rota ou fazer rotas específicas,
+como "statistics/week", "statistics/month", etc
+
+#########################################################
+
+* Documentar API
+* Revisar se faltou algum endpoint
     * buscar estatísticas de consultas
     * usuário
         * login / autenticação
