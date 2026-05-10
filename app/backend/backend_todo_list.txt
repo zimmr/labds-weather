@@ -43,7 +43,8 @@ Definir como será feita a autenticação. Mas penso em um token gerado a partir
 Esse token será recebido pelos headers de todas as requisições para as quais for necessário.
 Será validado para cada ação que precisar.
 
-** Logout poderá ser feito pelo front, apenas apagando dados do cache que seriam enviados pelo header.
+** Logout poderá ser feito pelo front, apagando dados do cache que seriam enviados pelo header.
+** Mas talvez seja bom ter uma rota para apagar o token do cache da api
 
 * POST user/favorites                                 [ ]
 Salva um novo favoritos.
