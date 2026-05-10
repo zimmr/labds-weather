@@ -1,5 +1,7 @@
 package services;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -12,38 +14,31 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
     private String domain = baseUrl + "data/2.5/weather";
     private HashMap<String, CurrentWeatherDto> cache = new HashMap<>();
 
-    public CurrentWeatherDto getCurrentWeather(CurrentWeatherRequest request) {
-        try {
-            
-            // Regra 1.4 Não permitir espaços inválidos
-            String key = getFormattedQuery(request);
+    public CurrentWeatherDto getCurrentWeather(CurrentWeatherRequest request) throws MalformedURLException, IOException {
+        // Regra 1.4 Não permitir espaços inválidos
+        String key = getFormattedQuery(request);
 
-            // Regra 2.3 - Controle de duplicidade: Não consultar API se já consultou antes
-            // Regra 4.1 - Cache inteligente: Antes de chamar API → verificar lista
-            // Regra 4.2 - Cache inteligente: se existir → usar dado local
-            var cacheResult = cache.get(key);
-            if (cacheResult != null)
-            {
-                System.out.println("Resultado retornado do cache. Chave: " + key);
-                return cacheResult;
-            }
-            
-            // Regra 4.3 - Cache inteligente: •se não → chamar API
-            String path = domain + "?q=" + key + "&appid=" + apiKey;
-
-            var result = JsonUtils.deserialize(sendRequest(path), CurrentWeatherDto.class);
-                
-            // Regra 2.2 - Controle de duplicidade: Não salvar se já existir registro
-            // Regra 2.4 - Controle de duplicidade: Impedir duplicação na lista
-            if (!cache.containsKey(key))
-                cache.put(key, result);
-
-            return result;
-
-        } catch (Exception e) {
-            System.out.println("erro: " + e.getMessage());
-            return null;
+        // Regra 2.3 - Controle de duplicidade: Não consultar API se já consultou antes
+        // Regra 4.1 - Cache inteligente: Antes de chamar API → verificar lista
+        // Regra 4.2 - Cache inteligente: se existir → usar dado local
+        var cacheResult = cache.get(key);
+        if (cacheResult != null)
+        {
+            System.out.println("Resultado retornado do cache. Chave: " + key);
+            return cacheResult;
         }
+        
+        // Regra 4.3 - Cache inteligente: •se não → chamar API
+        String path = domain + "?q=" + key + "&appid=" + apiKey;
+
+        var result = JsonUtils.deserialize(sendRequest(path), CurrentWeatherDto.class);
+            
+        // Regra 2.2 - Controle de duplicidade: Não salvar se já existir registro
+        // Regra 2.4 - Controle de duplicidade: Impedir duplicação na lista
+        if (!cache.containsKey(key))
+            cache.put(key, result);
+
+        return result;
     }
 
     private String getFormattedQuery(CurrentWeatherRequest request) {
