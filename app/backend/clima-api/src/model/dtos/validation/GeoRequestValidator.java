@@ -23,6 +23,6 @@ public class GeoRequestValidator {
         if (request.city != null && request.city.matches(".*\\d.*"))
             errors.add("Parâmetro 'city' contém números.");
 
-        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida.", errors) :null;
+        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida", errors) :null;
     }
 }

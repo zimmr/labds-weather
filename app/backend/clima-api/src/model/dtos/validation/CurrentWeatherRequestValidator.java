@@ -37,6 +37,6 @@ public class CurrentWeatherRequestValidator {
         if (request.city != null && request.country.matches(".*\\d.*"))
             errors.add("Parâmetro 'country' contém números.");
 
-        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida.", errors) :null;
+        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida", errors) :null;
     }
 }

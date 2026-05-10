@@ -27,7 +27,9 @@
 **400 Bad Request**
 ```
 {
-    "code": 400,
-    "Message": "Error message"
+    "message": "Requisição inválida",
+    "errors": [
+        "Parâmetro 'city' vazio."
+    ]
 }
 ```

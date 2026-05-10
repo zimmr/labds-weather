@@ -15,6 +15,6 @@ public class UserRequestValidator {
         if (request == null || request.name == null || request.name.isEmpty() || request.name.isBlank())
             errors.add("Requisição inválida: Parâmetro 'name' vazio.");
 
-        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida.", errors) :null;
+        return (errors.size() > 0) ? new ErrorResponse("Requisição inválida", errors) :null;
     }
 }
