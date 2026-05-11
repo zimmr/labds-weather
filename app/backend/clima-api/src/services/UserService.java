@@ -7,7 +7,7 @@ import model.dtos.request.GetUserRequest;
 import model.dtos.request.UserRequest;
 import repositories.IUserRepository;
 
-public class UserService implements IUserService {
+public class UserService extends BaseService implements IUserService {
 
     private IUserRepository repository;
 
@@ -16,10 +16,12 @@ public class UserService implements IUserService {
     }
 
     public User get(GetUserRequest request) throws MalformedURLException, IOException, Exception {
+        enforceRequestLimit();
         return repository.get(request.id);
     }
 
     public User save(UserRequest request) throws MalformedURLException, IOException, Exception {
+        enforceRequestLimit();
         User user = new User(request.name, request.email, request.password, request.celsius);
         
         if (repository.exists(user.getEmail()))

@@ -24,6 +24,7 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
 
     public CurrentWeatherDto getCurrentWeather(CurrentWeatherRequest request) throws Exception {
         
+        enforceRequestLimit();
         saveLog(request);
 
         // Regra 1.4 Não permitir espaços inválidos

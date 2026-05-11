@@ -17,6 +17,9 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
     private HashMap<String, List<CityDto>> cache = new HashMap<>();
     
     public List<CityDto> searchByName(GeoRequest request) throws Exception {
+
+        enforceRequestLimit();
+
         // Regra 1.4 Não permitir espaços inválidos   
         String city = URLEncoder.encode(request.city.trim(), StandardCharsets.UTF_8).toLowerCase();
 
