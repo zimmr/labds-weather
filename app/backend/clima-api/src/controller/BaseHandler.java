@@ -10,10 +10,21 @@ import java.util.function.Function;
 import com.sun.net.httpserver.HttpExchange;
 
 import controller.interfaces.Action;
+import controller.interfaces.NullRequestAction;
 import model.dtos.response.ErrorResponse;
 import utils.JsonUtils;
 
 public class BaseHandler {
+
+        // Método GET
+    protected <TResponse> void get(HttpExchange exchange, NullRequestAction<TResponse> action) throws IOException {
+        try {
+            TResponse response = action.execute();
+            handleSuccess(exchange, response);
+        } catch (Exception e) {
+            handleError(exchange, e);
+        }
+    }
 
     // Método GET
     protected <TRequest, TResponse> void get(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {

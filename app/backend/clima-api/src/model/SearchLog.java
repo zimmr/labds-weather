@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 // TODO: talvez mover para uma pasta "entities"
 public class SearchLog {
@@ -8,8 +9,8 @@ public class SearchLog {
     private City city;
     private LocalDateTime date;
 
-    public SearchLog(String id, City city) {
-        this.id = id;
+    public SearchLog(City city) {
+        this.id = UUID.randomUUID().toString();
         this.city = city;
         this.date = LocalDateTime.now();
     }

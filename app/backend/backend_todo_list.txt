@@ -78,6 +78,9 @@ Autenticar.
 Limpa todo o histórico do usuário.
 Autenticar.
 
+* GET logs                                            [V]
+Rota criada para testar registros.
+
 * GET statistics                                      [ ]
 Lista estatísticas, baseado nos logs salvos.
 Locais mais buscados de todos os tempos.

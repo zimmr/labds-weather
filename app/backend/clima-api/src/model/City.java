@@ -1,40 +1,46 @@
 package model;
 
-// TODO: passar variáveis para camelCase, conforma padrão do Java
+
 // TODO: talvez mover para uma pasta "entities"
-// TODO: criar métodos
+// TODO: verificar tipo da latitude e longitude
 public class City {
-    private String Name;
-    private String State;
-    private String Country;
-    private String Latitude;
-    private String Longitude;
+    private String name;
+    private String state;
+    private String country;
+    private float latitude;
+    private float longitude;
+
+    public City(String name, String state, String country) {
+        this.name = name;
+        this.state = state;
+        this.country = country;
+    }
     
-    public City(String name, String state, String country, String latitude, String longitude) {
-        Name = name;
-        State = state;
-        Country = country;
-        Latitude = latitude;
-        Longitude = longitude;
+    public City(String name, String state, String country, float latitude, float longitude) {
+        this.name = name;
+        this.state = state;
+        this.country = country;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
-    public String getLatitude() {
-        return Latitude;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public String getLongitude() {
-        return Longitude;
+    public float getLongitude() {
+        return longitude;
     }
 }

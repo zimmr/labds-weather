@@ -5,6 +5,9 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+
+import model.City;
+import model.SearchLog;
 import model.dtos.request.CurrentWeatherRequest;
 import model.dtos.response.CurrentWeatherDto;
 import utils.JsonUtils;
@@ -13,8 +16,16 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
 
     private String domain = baseUrl + "data/2.5/weather";
     private HashMap<String, CurrentWeatherDto> cache = new HashMap<>();
+    private final ISearchLogService searchLogService;
 
-    public CurrentWeatherDto getCurrentWeather(CurrentWeatherRequest request) throws MalformedURLException, IOException {
+    public CurrentWeatherApiService(ISearchLogService searchLogService) {
+        this.searchLogService = searchLogService;
+    }
+
+    public CurrentWeatherDto getCurrentWeather(CurrentWeatherRequest request) throws Exception {
+        
+        saveLog(request);
+
         // Regra 1.4 Não permitir espaços inválidos
         String key = getFormattedQuery(request);
 
@@ -39,6 +50,11 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
             cache.put(key, result);
 
         return result;
+    }
+
+    private void saveLog(CurrentWeatherRequest request) throws MalformedURLException, IOException, Exception {
+        var searchLog = new SearchLog(new City(request.city, request.state, request.country));
+        searchLogService.save(searchLog);
     }
 
     private String getFormattedQuery(CurrentWeatherRequest request) {
