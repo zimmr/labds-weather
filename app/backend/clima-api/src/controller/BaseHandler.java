@@ -16,7 +16,7 @@ import utils.JsonUtils;
 
 public class BaseHandler {
 
-        // Método GET
+    // Método GET
     protected <TResponse> void get(HttpExchange exchange, NullRequestAction<TResponse> action) throws IOException {
         try {
             TResponse response = action.execute();

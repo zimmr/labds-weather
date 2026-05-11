@@ -45,7 +45,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/weather/current?city=Canoas&state=Rio Grande do Sul&country=br",
+              "raw": "http://localhost:8080/weather/current?city=Canoas&state=Rio Grande do Sul&country=BR",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -66,7 +66,7 @@
                 },
                 {
                   "key": "country",
-                  "value": "br"
+                  "value": "BR"
                 }
               ]
             }
@@ -85,7 +85,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao@mail\",\r\n    \"senha\": \"123\",\r\n    \"celsius\": true\r\n}",
+              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao@email.edu.br\",\r\n    \"password\": \"123\",\r\n    \"celsius\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -124,7 +124,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/user?id=c16117b6-3b03-4219-9602-be717cdaa523",
+              "raw": "http://localhost:8080/user?id=ac22d9d1-3dd5-4832-b48c-bf4aa45e7aac",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -136,8 +136,32 @@
               "query": [
                 {
                   "key": "id",
-                  "value": "c16117b6-3b03-4219-9602-be717cdaa523"
+                  "value": "ac22d9d1-3dd5-4832-b48c-bf4aa45e7aac"
                 }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "logs",
+      "item": [
+        {
+          "name": "Get Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "logs"
               ]
             }
           },
