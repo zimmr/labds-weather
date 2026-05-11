@@ -20,6 +20,9 @@ Baixar .jar e salvar no diretório /lib
 3. Executar `.\run.ps1` no Powershell.
 
 ### Testando a API
+Baixar e importar a collection no Postman: https://github.com/zimmr/labds-weather/blob/main/docs/Clima%20API.postman_collection.json  
+
+Ou usar a linha de comando:
 ```
 curl "http://localhost:8080/geo?city=Porto Alegre"
 ```
