@@ -7,7 +7,7 @@ Desenvolvido em Java.
 
 ### Dependências
 Baixar .jar e salvar no diretório /lib
-* Gson 2.14.0 https://mvnrepository.com/artifact/com.google.code.gson/gson/2.14.0
+* Gson 2.14.0 https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/
   
 ### Configuração de variáveis
 1. Copiar o arquivo `config.properties.example`
