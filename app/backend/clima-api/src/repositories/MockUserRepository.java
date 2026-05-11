@@ -15,4 +15,10 @@ public class MockUserRepository implements IUserRepository {
     public User get(String id) {
         return users.getOrDefault(id, null);
     }
+
+    public boolean exists(String email) {
+        return users.values()
+            .stream()
+            .anyMatch(x -> x.getEmail().equals(email));
+    }
 }

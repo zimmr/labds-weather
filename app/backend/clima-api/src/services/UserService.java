@@ -22,6 +22,9 @@ public class UserService implements IUserService {
     public User save(UserRequest request) throws MalformedURLException, IOException, Exception {
         User user = new User(request.name, request.email, request.password, request.celsius);
         
+        if (repository.exists(user.getEmail()))
+            throw new Exception("Já existe um usuário cadastrado com este email.");
+
         repository.save(user);
 
         return user;

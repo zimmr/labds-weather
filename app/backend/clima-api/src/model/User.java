@@ -16,7 +16,7 @@ public class User {
     public User(String name, String email, String password, boolean celsius) {
         this.id =  UUID.randomUUID().toString();
         this.name = name;
-        this.email = email;
+        this.email = email.trim().toLowerCase();
         this.password = password;
         this.celsius = celsius;
     }
