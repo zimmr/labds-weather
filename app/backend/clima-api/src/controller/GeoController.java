@@ -6,12 +6,12 @@ import model.dtos.request.GeoRequest;
 import model.dtos.validation.GeoRequestValidator;
 import services.IGeoApiService;
 
-public class GeoHandler extends BaseHandler {
+public class GeoController extends BaseController {
 
     private final IGeoApiService geoApiService;
     private final GeoRequestValidator geoRequestValidator = new GeoRequestValidator();
 
-    public GeoHandler(IGeoApiService geoApiService) {
+    public GeoController(IGeoApiService geoApiService) {
         this.geoApiService = geoApiService;
     }
 

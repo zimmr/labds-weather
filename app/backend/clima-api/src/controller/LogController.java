@@ -4,11 +4,11 @@ import com.sun.net.httpserver.HttpServer;
 
 import services.ISearchLogService;
 
-public class LogHandler extends BaseHandler {
+public class LogController extends BaseController {
 
     private final ISearchLogService searchLogService;
 
-    public LogHandler(ISearchLogService searchLogService) {
+    public LogController(ISearchLogService searchLogService) {
         this.searchLogService = searchLogService;
     }
 

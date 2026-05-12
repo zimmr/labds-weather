@@ -8,13 +8,13 @@ import model.dtos.validation.GetUserRequestValidator;
 import model.dtos.validation.UserRequestValidator;
 import services.IUserService;
 
-public class UserHandler extends BaseHandler {
+public class UserController extends BaseController {
 
     private final IUserService userService;
     private final GetUserRequestValidator getUserRequestValidator = new GetUserRequestValidator();
     private final UserRequestValidator userRequestValidator = new UserRequestValidator();
 
-    public UserHandler(IUserService userService) {
+    public UserController(IUserService userService) {
         this.userService = userService;
     }
 

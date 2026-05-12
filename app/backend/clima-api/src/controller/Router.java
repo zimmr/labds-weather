@@ -9,16 +9,16 @@ import services.IUserService;
 
 public class Router {
     
-    private CurrentWeatherHandler currentWeatherHandler;
-    private GeoHandler geoHandler;
-    private UserHandler userHandler;
-    private LogHandler logHandler;
+    private CurrentWeatherController currentWeatherHandler;
+    private GeoController geoHandler;
+    private UserController userHandler;
+    private LogController logHandler;
 
     public Router(IGeoApiService geoApiService, ICurrentWeatherApiService currentWeatherApiService, IUserService userService, ISearchLogService searchLogService) {
-        geoHandler = new GeoHandler(geoApiService);
-        currentWeatherHandler = new CurrentWeatherHandler(currentWeatherApiService);
-        userHandler = new UserHandler(userService);
-        logHandler = new LogHandler(searchLogService);
+        geoHandler = new GeoController(geoApiService);
+        currentWeatherHandler = new CurrentWeatherController(currentWeatherApiService);
+        userHandler = new UserController(userService);
+        logHandler = new LogController(searchLogService);
     }
 
     public void createContext(HttpServer server) {

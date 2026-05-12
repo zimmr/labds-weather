@@ -7,12 +7,12 @@ import model.dtos.validation.CurrentWeatherRequestValidator;
 import services.ICurrentWeatherApiService;
 
 
-public class CurrentWeatherHandler extends BaseHandler {
+public class CurrentWeatherController extends BaseController {
 
     private final ICurrentWeatherApiService currentWeatherApiService;
     private final CurrentWeatherRequestValidator currentWeatherRequestValidator = new CurrentWeatherRequestValidator();
 
-    public CurrentWeatherHandler(ICurrentWeatherApiService currentWeatherApiService) {
+    public CurrentWeatherController(ICurrentWeatherApiService currentWeatherApiService) {
         this.currentWeatherApiService = currentWeatherApiService;
     }
 

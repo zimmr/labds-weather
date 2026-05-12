@@ -14,7 +14,7 @@ import controller.interfaces.NullRequestAction;
 import model.dtos.response.ErrorResponse;
 import utils.JsonUtils;
 
-public class BaseHandler {
+public class BaseController {
 
     // Método GET
     protected <TResponse> void get(HttpExchange exchange, NullRequestAction<TResponse> action) throws IOException {

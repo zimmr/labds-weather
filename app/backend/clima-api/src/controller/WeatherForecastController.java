@@ -3,9 +3,9 @@ package controller;
 import com.sun.net.httpserver.HttpServer;
 
 
-public class WeatherForecastHandler {
+public class WeatherForecastController {
 
-    public WeatherForecastHandler() {    }
+    public WeatherForecastController() {    }
 
     public void create(HttpServer server) {
         String basePath = "/weather/forecast";
