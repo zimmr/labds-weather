@@ -47,8 +47,9 @@ public class BaseController {
             handleError(exchange, e);
         }
     }
-
+    
     // Método POST
+    // Provavelmente não vamos precisar de métodos específicos para PUT e DELETE, podemos usar o de POST, recebendo os parâmetros todos pelo body
     protected <TRequest, TResponse> void post(HttpExchange exchange, Class<TRequest> requestClass, Action<TRequest, TResponse> action, Function<TRequest, ErrorResponse> validation) throws IOException {
         try {
             InputStream inputStream = exchange.getRequestBody();
@@ -70,43 +71,36 @@ public class BaseController {
         }
     }
 
-    // TODO: Provavelmente não vai precisar de métodos específicos para PUT e DELETE, podemos usar o de POST, recebendo os parâmetros todos pelo body
+    // TODO: método para obter parâmetros de headers
+    // ...
+    //    
 
     private <TRequest> TRequest getRequestBody(Class<TRequest> requestClass, InputStream inputStream) {
         String json = JsonUtils.getJsonFromStream(inputStream);
         return JsonUtils.deserialize(json, requestClass);
     }
-   
-    // TODO: método para obter parâmetros de headers
-    // ...
-    //    
 
     private <T> T getQueryParams(String query, Class<T> classType)
     {
-        try {
-            Map<String, Object> queryParamsMap = new HashMap<String, Object>();
+        Map<String, Object> queryParamsMap = new HashMap<String, Object>();
 
-            String[] queryParams = query.split("&");
+        String[] queryParams = query.split("&");
 
-            for (String param : queryParams) {
-                var paramValuePair = param.split("=");
-                
-                var key = getValueFromArray(paramValuePair, 0);
-                if (key == "headers") // impede de receber parâmetro 'headers' pela query
-                    continue;
+        for (String param : queryParams) {
+            var paramValuePair = param.split("=");
+            
+            var key = getValueFromArray(paramValuePair, 0);
+            if (key == "headers") // impede de receber parâmetro 'headers' pela query
+                continue;
 
-                var value = getValueFromArray(paramValuePair, 1);
+            var value = getValueFromArray(paramValuePair, 1);
 
-                if (key != null)
-                    queryParamsMap.put(key.toString(), value);
-            }
-
-            String queryParamsJson = JsonUtils.toJson(queryParamsMap);
-            return JsonUtils.deserialize(queryParamsJson, classType);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            if (key != null)
+                queryParamsMap.put(key.toString(), value);
         }
+
+        String queryParamsJson = JsonUtils.toJson(queryParamsMap);
+        return JsonUtils.deserialize(queryParamsJson, classType);
     }
 
     private Object getValueFromArray(String[] paramValuePair, int index)
@@ -128,7 +122,6 @@ public class BaseController {
     }
 
     private void handleError(HttpExchange exchange, Exception e) throws IOException {
-        e.printStackTrace();
         var errorResponse = new ErrorResponse("Bad Request", e.getMessage());
         handleError(exchange, errorResponse);
     }

@@ -20,7 +20,6 @@ public class BaseService {
         }
 
         requests++;
-        System.out.println(requests);
 
         // Regra 3.2. Limita número máximo de consultas
         // Regra 3.3. Limita número máximo de consultas
