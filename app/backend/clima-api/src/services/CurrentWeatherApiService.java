@@ -36,7 +36,7 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
         var cacheResult = cache.get(key);
         if (cacheResult != null)
         {
-            System.out.println("Resultado retornado do cache. Chave: " + key);
+            System.out.println("Em cache: " + key);
             return cacheResult;
         }
         

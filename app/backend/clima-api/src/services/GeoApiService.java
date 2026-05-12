@@ -29,7 +29,7 @@ public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiS
         var cacheResult = cache.get(city);
         if (cacheResult != null)
         {
-            System.out.println("Em cache. Chave: " + city);
+            System.out.println("Em cache: " + city);
             return cacheResult;
         }
         
