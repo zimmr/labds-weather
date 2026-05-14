@@ -6,30 +6,23 @@ collate utf8mb4_unicode_ci;
 
 use projeto_api;
 
-create table Clima(
-	id int auto_increment primary key,
-	cidade varchar(100),
-	temperatura varchar(20),
-	descricao varchar(100)
-);
-
 create table Usuario(
-	id_User varchar(50) NOT NULL primary key,
+	id_user varchar(50) NOT NULL primary key,
     nome varchar(50) NOT NULL,
     email varchar(50) NOT NULL UNIQUE,
     senha varchar(255) NOT NULL,
-    usa_Celsius bit NOT NULL
+    usa_celsius bit NOT NULL
 );
 
 create table Historico(
-	id_Hist varchar(50) NOT NULL primary key,
+	id_hist varchar(50) NOT NULL primary key,
     user_id varchar(50) NOT NULL,
     data_consulta date NOT NULL,
     cidade varchar(50) NOT NULL,
-    estado varchar(50) NOT NULL,
+    estado varchar(50),
     pais varchar(50) NOT NULL,
-    latitude decimal(9,6) NOT NULL,
-    longitude decimal(9,6) NOT NULL,
+    latitude decimal(9,6),
+    longitude decimal(9,6),
     dados_consulta varchar(200)NOT NULL,
     
     constraint FK_Historico_Usuario
@@ -38,14 +31,14 @@ create table Historico(
 );
 
 create table Favoritos(
-	id_Fave varchar(50) NOT NULL PRIMARY KEY,
+	id_fave varchar(50) NOT NULL PRIMARY KEY,
     user_id varchar(50) NOT NULL,
     titulo varchar(200) NOT NULL, 
     cidade varchar(50) NOT NULL,
-    estado varchar(50) NOT NULL,
+    estado varchar(50),
     pais varchar(50) NOT NULL,
-    latitude decimal(9,6) NOT NULL,
-    longitude decimal(9,6) NOT NULL,
+    latitude decimal(9,6),
+    longitude decimal(9,6),
     
     constraint FK_Favoritos_Usuario
     foreign key (user_id)
@@ -53,11 +46,11 @@ create table Favoritos(
 );
 
 create table Log(
-	id_Log varchar(50) NOT NULL PRIMARY KEY,
+	id_log varchar(50) NOT NULL PRIMARY KEY,
     data_consulta date NOT NULL,
     cidade varchar(50) NOT NULL,
-    estado varchar(50) NOT NULL,
+    estado varchar(50),
     pais varchar(50) NOT NULL,
-    latitude decimal(9,6) NOT NULL,
-    longitude decimal(9,6) NOT NULL
+    latitude decimal(9,6),
+    longitude decimal(9,6)
 );
