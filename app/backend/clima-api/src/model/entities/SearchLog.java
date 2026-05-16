@@ -1,9 +1,8 @@
-package model;
+package model.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-// TODO: talvez mover para uma pasta "entities"
 public class SearchLog {
     private String id;
     private City city;

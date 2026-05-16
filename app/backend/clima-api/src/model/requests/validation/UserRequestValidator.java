@@ -1,9 +1,9 @@
-package model.dtos.validation;
+package model.requests.validation;
 
 import java.util.ArrayList;
 
-import model.dtos.request.UserRequest;
-import model.dtos.response.ErrorResponse;
+import model.requests.UserRequest;
+import model.responses.ErrorResponse;
 
 public class UserRequestValidator {
 

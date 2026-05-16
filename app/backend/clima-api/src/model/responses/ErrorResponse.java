@@ -1,4 +1,4 @@
-package model.dtos.response;
+package model.responses;
 
 import java.util.ArrayList;
 import java.util.Arrays;

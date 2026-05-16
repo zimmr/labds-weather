@@ -1,8 +1,7 @@
-package model;
+package model.entities;
 
 import java.util.UUID;
 
-// TODO: talvez mover para uma pasta "entities"
 public class User {
     private String id;
     private String name;

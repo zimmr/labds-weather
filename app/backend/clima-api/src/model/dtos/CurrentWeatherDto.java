@@ -1,4 +1,4 @@
-package model.dtos.response;
+package model.dtos;
 
 import java.util.List;
 

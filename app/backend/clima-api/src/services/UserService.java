@@ -2,9 +2,10 @@ package services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import model.User;
-import model.dtos.request.GetUserRequest;
-import model.dtos.request.UserRequest;
+
+import model.entities.User;
+import model.requests.GetUserRequest;
+import model.requests.UserRequest;
 import repositories.IUserRepository;
 
 public class UserService extends BaseService implements IUserService {

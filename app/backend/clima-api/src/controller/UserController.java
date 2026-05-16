@@ -2,10 +2,10 @@ package controller;
 
 import com.sun.net.httpserver.HttpServer;
 
-import model.dtos.request.GetUserRequest;
-import model.dtos.request.UserRequest;
-import model.dtos.validation.GetUserRequestValidator;
-import model.dtos.validation.UserRequestValidator;
+import model.requests.GetUserRequest;
+import model.requests.UserRequest;
+import model.requests.validation.GetUserRequestValidator;
+import model.requests.validation.UserRequestValidator;
 import services.IUserService;
 
 public class UserController extends BaseController {

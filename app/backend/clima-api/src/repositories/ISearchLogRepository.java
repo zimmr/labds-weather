@@ -1,7 +1,8 @@
 package repositories;
 
 import java.util.ArrayList;
-import model.SearchLog;
+
+import model.entities.SearchLog;
 
 public interface ISearchLogRepository {
     public ArrayList<SearchLog> getAll();

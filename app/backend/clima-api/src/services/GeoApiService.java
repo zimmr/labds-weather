@@ -5,8 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
-import model.dtos.request.GeoRequest;
-import model.dtos.response.CityDto;
+import model.dtos.CityDto;
+import model.requests.GeoRequest;
 import utils.JsonUtils;
 
 public class GeoApiService extends BaseOpenWeatherApiService implements IGeoApiService {

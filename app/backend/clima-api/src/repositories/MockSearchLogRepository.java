@@ -2,7 +2,8 @@ package repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import model.SearchLog;
+
+import model.entities.SearchLog;
 
 public class MockSearchLogRepository implements ISearchLogRepository {
 

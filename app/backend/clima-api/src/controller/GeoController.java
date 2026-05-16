@@ -2,8 +2,8 @@ package controller;
 
 import com.sun.net.httpserver.HttpServer;
 
-import model.dtos.request.GeoRequest;
-import model.dtos.validation.GeoRequestValidator;
+import model.requests.GeoRequest;
+import model.requests.validation.GeoRequestValidator;
 import services.IGeoApiService;
 
 public class GeoController extends BaseController {

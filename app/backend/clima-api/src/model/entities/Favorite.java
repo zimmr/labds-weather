@@ -1,7 +1,6 @@
-package model;
+package model.entities;
 
 // TODO: passar variáveis para camelCase, conforma padrão do Java
-// TODO: talvez mover para uma pasta "entities"
 // TODO: criar métodos
 public class Favorite {
     private String Id;
@@ -9,7 +8,7 @@ public class Favorite {
     private String Title;
     private City City;
     
-    public Favorite(String id, String userId, String title, model.City city) {
+    public Favorite(String id, String userId, String title, model.entities.City city) {
         Id = id;
         UserId = userId;
         Title = title;

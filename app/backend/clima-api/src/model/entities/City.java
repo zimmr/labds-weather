@@ -1,7 +1,6 @@
-package model;
+package model.entities;
 
 
-// TODO: talvez mover para uma pasta "entities"
 // TODO: verificar tipo da latitude e longitude
 public class City {
     private String name;
