@@ -71,9 +71,14 @@ public class BaseController {
         }
     }
 
-    // TODO: método para obter parâmetros de headers
-    // ...
-    //    
+    private RequestHeaders getHeaders(HttpExchange exchange) throws Exception {
+        var headers = exchange.getRequestHeaders();
+        
+        var login = headers.getFirst("login");
+        var password = headers.getFirst("password");
+
+        return new RequestHeaders(login, password);
+    }
 
     private <TRequest> TRequest getRequestBody(Class<TRequest> requestClass, InputStream inputStream) {
         String json = JsonUtils.getJsonFromStream(inputStream);
