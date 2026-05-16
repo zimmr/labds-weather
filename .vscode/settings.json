@@ -4,6 +4,7 @@
     ],
     "java.project.referencedLibraries": [
         "app\\backend\\clima-api\\lib\\gson-2.14.0.jar",
-        "app\\backend\\clima-api\\lib\\mysql-connector-j-9.7.0.jar"
+        "app\\backend\\clima-api\\lib\\mysql-connector-j-9.7.0.jar",
+        "app\\backend\\clima-api\\lib\\jbcrypt-0.4.jar"
     ]
 }
