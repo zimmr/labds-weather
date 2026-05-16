@@ -1,4 +1,4 @@
-package model.dtos.response;
+package model.dtos;
 
 public class CurrentWeatherMainDto {
     // NOTA: é tudo em Kelvin

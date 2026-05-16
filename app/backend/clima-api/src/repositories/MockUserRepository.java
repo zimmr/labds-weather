@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.HashMap;
 
-import model.User;
+import model.entities.User;
 
 public class MockUserRepository implements IUserRepository {
 

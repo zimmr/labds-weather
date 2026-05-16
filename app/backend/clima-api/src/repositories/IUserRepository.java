@@ -1,6 +1,6 @@
 package repositories;
 
-import model.User;
+import model.entities.User;
 
 public interface IUserRepository {
     public void save(User user);

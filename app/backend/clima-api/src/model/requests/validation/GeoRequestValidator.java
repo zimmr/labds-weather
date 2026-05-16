@@ -1,9 +1,9 @@
-package model.dtos.validation;
+package model.requests.validation;
 
 import java.util.ArrayList;
 
-import model.dtos.request.GeoRequest;
-import model.dtos.response.ErrorResponse;
+import model.requests.GeoRequest;
+import model.responses.ErrorResponse;
 
 public class GeoRequestValidator {
 

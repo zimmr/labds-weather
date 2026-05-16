@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
-import model.SearchLog;
+import model.entities.SearchLog;
 import repositories.ISearchLogRepository;
 
 public class SearchLogService extends BaseService implements ISearchLogService {

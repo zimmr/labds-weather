@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
-import model.SearchLog;
+import model.entities.SearchLog;
 
 public interface ISearchLogService {
         public List<SearchLog> getAll() throws MalformedURLException, IOException, Exception;

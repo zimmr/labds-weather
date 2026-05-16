@@ -1,8 +1,9 @@
-package model.dtos.validation;
+package model.requests.validation;
 
 import java.util.ArrayList;
-import model.dtos.request.CurrentWeatherRequest;
-import model.dtos.response.ErrorResponse;
+
+import model.requests.CurrentWeatherRequest;
+import model.responses.ErrorResponse;
 
 public class CurrentWeatherRequestValidator {
 

@@ -6,10 +6,10 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
-import model.City;
-import model.SearchLog;
-import model.dtos.request.CurrentWeatherRequest;
-import model.dtos.response.CurrentWeatherDto;
+import model.dtos.CurrentWeatherDto;
+import model.entities.City;
+import model.entities.SearchLog;
+import model.requests.CurrentWeatherRequest;
 import utils.JsonUtils;
 
 public class CurrentWeatherApiService extends BaseOpenWeatherApiService implements ICurrentWeatherApiService {

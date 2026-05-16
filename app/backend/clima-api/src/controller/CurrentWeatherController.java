@@ -2,8 +2,8 @@ package controller;
 
 import com.sun.net.httpserver.HttpServer;
 
-import model.dtos.request.CurrentWeatherRequest;
-import model.dtos.validation.CurrentWeatherRequestValidator;
+import model.requests.CurrentWeatherRequest;
+import model.requests.validation.CurrentWeatherRequestValidator;
 import services.ICurrentWeatherApiService;
 
 
