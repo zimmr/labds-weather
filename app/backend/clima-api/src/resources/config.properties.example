@@ -1,2 +1,6 @@
 openweather.baseUrl=https://api.openweathermap.org/
 openweather.apiKey=abc123
+
+db.url=jdbc:mysql://localhost:3306/projeto_api?useSSL=false&serverTimezone=America/Sao_Paulo
+db.user=root
+db.password=
