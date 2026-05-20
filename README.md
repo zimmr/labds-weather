@@ -8,6 +8,7 @@ Desenvolvido em Java.
 ### Dependências
 Baixar .jar e salvar no diretório /lib
 * Gson 2.14.0 https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/
+* MySQL Connector/J 9.7.0 https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/9.7.0/
   
 ### Configuração de variáveis
 1. Copiar o arquivo `config.properties.example`
