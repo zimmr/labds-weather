@@ -2,62 +2,66 @@ package model.entities;
 
 import java.util.UUID;
 
+import utils.HashUtils;
+
 public class User {
     private String id;
     private String name;
     private String email;
     private String password;
-    private boolean celsius;
+    private boolean useCelsius;
     // TODO: histórico
     // TODO: favoritos
     // TODO: outros métodos
 
-    public User(String name, String email, String password, boolean celsius) {
+    public User(String name, String email, String password, boolean useCelsius) {
         this.id =  UUID.randomUUID().toString();
-        this.name = name;
-        this.email = email.trim().toLowerCase();
-        this.password = password;
-        this.celsius = celsius;
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+        setUseCelsius(useCelsius);
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private void setName(String name) {
+        this.name = name.trim();
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    private void setEmail(String email) {
+        this.email = email.trim().toLowerCase();
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    private void setPassword(String password) {
+        this.password = HashUtils.create(password);
     }
 
-    public boolean isCelsius() {
-        return celsius;
+    public boolean authenticate(String email, String password){
+        if (email.equals(email) && HashUtils.compare(password, this.password))
+            return true;
+
+        return false;
     }
 
-    public void setCelsius(boolean celsius) {
-        this.celsius = celsius;
+    public boolean getUseCelsius() {
+        return useCelsius;
     }
-    
+
+    public void setUseCelsius(boolean celsius) {
+        this.useCelsius = celsius;
+    }
 }
