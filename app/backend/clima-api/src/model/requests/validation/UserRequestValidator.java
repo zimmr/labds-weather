@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.requests.UserRequest;
 import model.responses.ErrorResponse;
 
-public class UserRequestValidator {
+public class UserRequestValidator extends EmailValidator {
 
     public ErrorResponse validate(UserRequest request)
     {
@@ -35,30 +35,5 @@ public class UserRequestValidator {
             errors.add("Parâmetro 'password' não deve ter mais que 250 caracteres.");
 
         return (errors.size() > 0) ? new ErrorResponse("Requisição inválida", errors) :null;
-    }
-
-    private boolean validateEmail(String email) {
-
-        if (email.contains(" ") || !email.contains("@"))
-            return false;
-
-        var splitEmail = email.split("@");
-        if (splitEmail.length < 2)
-            return false;
-
-        if (splitEmail.length >= 2)
-        {
-            if (!splitEmail[1].contains("."))
-                return false;
-
-            var splitDomain = splitEmail[1].split("\\.");
-            if (splitDomain.length < 2)
-                return false;
-
-            if (splitDomain.length >= 2 && !splitDomain[1].equals("org") && !splitDomain[1].equals("com") && !splitDomain[1].equals("edu"))
-                return false;
-        }
-
-        return true;
     }
 }
