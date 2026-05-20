@@ -2,7 +2,7 @@ import com.sun.net.httpserver.HttpServer;
 import controller.Router;
 import repositories.ISearchLogRepository;
 import repositories.IUserRepository;
-import repositories.MySqlSearchLogRepository; // usei o repositório do MySQL
+import repositories.SearchLogRepository;
 import repositories.MockUserRepository;
 import services.IGeoApiService;
 import services.ISearchLogService;
@@ -24,7 +24,7 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         // Dependências
-        ISearchLogRepository searchLogRepository = new MySqlSearchLogRepository(); // troquei pelo repositório do MySQL
+        ISearchLogRepository searchLogRepository = new SearchLogRepository();
         ISearchLogService searchLogService = new SearchLogService(searchLogRepository);
 
         IGeoApiService geoApiService = new GeoApiService();

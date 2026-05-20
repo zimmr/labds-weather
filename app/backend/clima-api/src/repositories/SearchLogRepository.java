@@ -13,7 +13,7 @@ import model.entities.SearchLog;
 import utils.MySqlConnection;
 
 
-public class MySqlSearchLogRepository implements ISearchLogRepository {
+public class SearchLogRepository implements ISearchLogRepository {
 
 
     @Override
