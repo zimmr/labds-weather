@@ -3,7 +3,7 @@ import controller.Router;
 import repositories.ISearchLogRepository;
 import repositories.IUserRepository;
 import repositories.SearchLogRepository;
-import repositories.MockUserRepository;
+import repositories.UserRepository;
 import services.IGeoApiService;
 import services.ISearchLogService;
 import services.IUserService;
@@ -30,7 +30,7 @@ public class Main {
         IGeoApiService geoApiService = new GeoApiService();
         ICurrentWeatherApiService currentWeatherApiService = new CurrentWeatherApiService(searchLogService);
         
-        IUserRepository userRepository = new MockUserRepository();
+        IUserRepository userRepository = new UserRepository();
         IUserService userService = new UserService(userRepository);
 
         router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService);
