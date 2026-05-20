@@ -21,4 +21,10 @@ public class MockUserRepository implements IUserRepository {
             .stream()
             .anyMatch(x -> x.getEmail().equals(email));
     }
+
+    @Override
+    public User getByEmail(String email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getByEmail'");
+    }
 }
