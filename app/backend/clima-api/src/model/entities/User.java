@@ -14,6 +14,16 @@ public class User {
     // TODO: favoritos
     // TODO: outros métodos
 
+    public User() {}
+
+    public User(String id, String name, String email, String password, boolean useCelsius) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.useCelsius = useCelsius;
+    }
+
     public User(String name, String email, String password, boolean useCelsius) {
         this.id =  UUID.randomUUID().toString();
         setName(name);
