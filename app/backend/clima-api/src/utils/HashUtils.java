@@ -5,7 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class HashUtils {
 
     public static String create(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public static boolean compare(String password, String hash) {
