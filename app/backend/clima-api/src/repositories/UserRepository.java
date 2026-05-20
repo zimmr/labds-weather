@@ -49,8 +49,41 @@ public class UserRepository implements IUserRepository {
             stmt.setString(1, id);
 
             try(ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return mapRow(rs);
+
+                if (rs.next()) {
+                    return mapRow(rs);
+                }
+
+                return null;
+            }
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar usuário: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public User getByEmail(String email) {
+
+        String sql = """
+            SELECT id_user, nome, email, senha, usa_celsius 
+            FROM Usuario 
+            WHERE email = ? 
+            LIMIT 1
+        """;
+
+        try (Connection conn = MySqlConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+
+            try(ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return mapRow(rs);
+                }
+
+                return null;
             }
 
         } catch (SQLException e) {
