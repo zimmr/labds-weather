@@ -11,6 +11,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 import controller.interfaces.Action;
 import controller.interfaces.NullRequestAction;
+import model.requests.RequestHeaders;
 import model.responses.ErrorResponse;
 import utils.JsonUtils;
 
