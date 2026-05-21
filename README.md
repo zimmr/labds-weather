@@ -9,6 +9,7 @@ Desenvolvido em Java.
 Baixar .jar e salvar no diretório /lib
 * Gson 2.14.0 https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/
 * MySQL Connector/J 9.7.0 https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/9.7.0/
+* JBCrypt 0.4 https://repo1.maven.org/maven2/org/mindrot/jbcrypt/0.4/
   
 ### Configuração de variáveis
 1. Copiar o arquivo `config.properties.example`
