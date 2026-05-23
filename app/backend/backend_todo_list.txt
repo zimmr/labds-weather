@@ -1,17 +1,5 @@
 Back End TO DO List
 
-* Criar e ajustar classes de modelos
-
-* Criar repositórios e conectar com o banco
-** ILogRepository
-Criada, implementar métodos necessários.
-
-** IUserRepository
-Criada, implementar métodos necessários.
-
-** LogRepository
-** UserRepository
-
 ########################## ENDPOINTS ####################
 
 * GET geo                                             [V]
@@ -44,7 +32,7 @@ Rota criada.
 Retorna dados do usuário.
 Repository criada, recuperando dados do banco.
 
-Essa rota é apenas para testar a persistência dos dados no banco, não será usada pelo front.
+# Essa rota é apenas para testar a persistência dos dados no banco, não será usada pelo front.
 
 * PUT user                                            [ ]
 Atualiza dados do usuário.
@@ -58,12 +46,12 @@ Exclui o usuário.
 
 ## Autenticação: só permitir a requisição se os dados de autenticação estiverem corretos nos headers.
 
-* POST user/login                             [V]
+* POST user/login                                     [V]
 Implementada.
-1. Recebe o email e a senha no corpo da requisição
-2. Recupera os dados do usuário pelo email
-3. Compara os dados recebidos com os dados persistidos
-4. Retorna dados do cliente.
+  1. Recebe o email e a senha no corpo da requisição
+  2. Recupera os dados do usuário pelo email
+  3. Compara os dados recebidos com os dados persistidos
+  4. Retorna dados do cliente.
 
 Falta:
 Tratar os dados do retorno.
@@ -95,6 +83,7 @@ Autenticar.
 
 * GET logs                                            [V]
 Rota criada para testar registros.
+# Essa rota é apenas para testar a persistência dos dados no banco, não será usada pelo front.
 
 * GET statistics                                      [ ]
 Lista estatísticas, baseado nos logs salvos.
@@ -104,22 +93,3 @@ Pode trazer tudo em uma rota ou fazer rotas específicas,
 como "statistics/week", "statistics/month", etc
 
 #########################################################
-
-* Documentar API
-* Revisar se faltou algum endpoint
-    * buscar estatísticas de consultas
-    * usuário
-        * login / autenticação
-        * cadastro
-        * editar dados
-        * excluir conta 
-        * usuário/favoritos
-            * listar
-            * salvar
-            * atualizar
-            * excluir
-        * usuário/preferencias
-            * celsius
-        * usuário/histórico
-            * listar
-            * excluir
