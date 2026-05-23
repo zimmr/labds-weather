@@ -85,7 +85,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao5@oemail.com.br\",\r\n    \"password\": \"1235\",\r\n    \"celsius\": true\r\n}",
+              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao5@email.com.br\",\r\n    \"password\": \"1235\",\r\n    \"celsius\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -113,7 +113,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"joao5@oemail.com.br\",\r\n    \"password\": \"1235\"\r\n}",
+              "raw": "{\r\n    \"email\": \"joao5@email.com.br\",\r\n    \"password\": \"1235\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -142,7 +142,18 @@
           },
           "request": {
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "login",
+                "value": "joao5@email.com.br",
+                "type": "text"
+              },
+              {
+                "key": "password",
+                "value": "1235",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "",
@@ -153,7 +164,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/user?id=6fd7bab1-5529-40cb-869e-9d574062a34d",
+              "raw": "http://localhost:8080/user?id=0ab1ba40-1023-4715-b1e3-df18040c98b6",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -165,7 +176,7 @@
               "query": [
                 {
                   "key": "id",
-                  "value": "6fd7bab1-5529-40cb-869e-9d574062a34d"
+                  "value": "0ab1ba40-1023-4715-b1e3-df18040c98b6"
                 }
               ]
             }
