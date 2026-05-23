@@ -15,7 +15,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/geo?city=Canoas",
+              "raw": "http://localhost:8080/geo?city=Porto Alegre",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -27,7 +27,7 @@
               "query": [
                 {
                   "key": "city",
-                  "value": "Canoas"
+                  "value": "Porto Alegre"
                 }
               ]
             }
@@ -85,7 +85,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao@email.edu.br\",\r\n    \"password\": \"123\",\r\n    \"celsius\": true\r\n}",
+              "raw": "{\r\n    \"name\": \"joão\",\r\n    \"email\": \"joao5@oemail.com.br\",\r\n    \"password\": \"1235\",\r\n    \"celsius\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -101,6 +101,35 @@
               "port": "8080",
               "path": [
                 "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"joao5@oemail.com.br\",\r\n    \"password\": \"1235\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/user/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "user",
+                "login"
               ]
             }
           },
@@ -124,7 +153,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/user?id=ac22d9d1-3dd5-4832-b48c-bf4aa45e7aac",
+              "raw": "http://localhost:8080/user?id=6fd7bab1-5529-40cb-869e-9d574062a34d",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -136,7 +165,7 @@
               "query": [
                 {
                   "key": "id",
-                  "value": "ac22d9d1-3dd5-4832-b48c-bf4aa45e7aac"
+                  "value": "6fd7bab1-5529-40cb-869e-9d574062a34d"
                 }
               ]
             }
