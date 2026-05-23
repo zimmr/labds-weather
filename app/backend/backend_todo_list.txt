@@ -30,31 +30,46 @@ com todos os dados tratados.
 
 * POST user                                           [V]
 Rota de cadastro do usuário.
-A rota está criada, falta implementar as validações necessárias.
-A service está usando um repositório mock.
-Não deve permitir caso os headers já estejam preenchidos com dados de autenticação.
-Deve autenticar e já retornar os dados de autenticação para manter o usuário logado.
-* GET user                                            [V]
-Retorna dados do usuário.
 Rota criada.
-A service está usando um repositório mock.
-Falta Autenticar.
+Validações implementadas (revisar)
+Repository criada, persistindo no banco.
+
+Falta:
+Não permitir registrar caso os headers já estejam preenchidos com dados de autenticação.
+Tratar dados do cliente no retorno: não trazer senha.
+Retornar favoritos do usuário.
+
+* GET user                                            [V]
+Rota criada.
+Retorna dados do usuário.
+Repository criada, recuperando dados do banco.
+
+Essa rota é apenas para testar a persistência dos dados no banco, não será usada pelo front.
+
 * PUT user                                            [ ]
 Atualiza dados do usuário.
 Recebe dados pelo corpo da requisição, atualiza somente os que não estiverem vazios.
 Validações obrigatórias para cada campo.
-Autenticar.
+
+## Autenticação: só permitir a requisição se os dados de autenticação estiverem corretos nos headers.
+
 * DELETE user                                         [ ]
 Exclui o usuário.
-Autenticar.
 
-* POST user/authenticate                              [ ]
-Definir como será feita a autenticação. Mas penso em um token gerado a partir do email, senha e horário de acesso.
-Esse token será recebido pelos headers de todas as requisições para as quais for necessário.
-Será validado para cada ação que precisar.
+## Autenticação: só permitir a requisição se os dados de autenticação estiverem corretos nos headers.
 
-** Logout poderá ser feito pelo front, apagando dados do cache que seriam enviados pelo header.
-** Mas talvez seja bom ter uma rota para apagar o token do cache da api
+* POST user/login                             [V]
+Implementada.
+1. Recebe o email e a senha no corpo da requisição
+2. Recupera os dados do usuário pelo email
+3. Compara os dados recebidos com os dados persistidos
+4. Retorna dados do cliente.
+
+Falta:
+Tratar os dados do retorno.
+Retornar favoritos.
+
+Logout poderá ser feito pelo front, apagando dados do cache que seriam enviados pelo header.
 
 * POST user/favorites                                 [ ]
 Salva um novo favoritos.
