@@ -1,15 +1,16 @@
 # Angular (frontend/weather-app)
-app/frontend/weather-app/node_modules/
-app/frontend/weather-app/dist/
-app/frontend/weather-app/.angular/
-app/frontend/weather-app/coverage/
-app/frontend/weather-app/tmp/
-app/frontend/weather-app/.env
-app/frontend/weather-app/.env.*
+*/node_modules/
+*/dist/
+*/.angular/
+*/coverage/
+*/tmp/
+*/.env
+*/.env.*
 # VS Code settings (opcional)
-app/frontend/weather-app/.vscode/
+*/.vscode/
 # macOS
-app/frontend/weather-app/.DS_Store
+*/.DS_Store
+
 # Compiled class file
 *.class
 
