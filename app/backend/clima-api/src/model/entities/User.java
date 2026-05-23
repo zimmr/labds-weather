@@ -61,7 +61,7 @@ public class User {
     }
 
     public boolean authenticate(String email, String password){
-        if (email.equals(email) && HashUtils.compare(password, this.password))
+        if (this.email.equals(email) && HashUtils.compare(password, this.password))
             return true;
 
         return false;
