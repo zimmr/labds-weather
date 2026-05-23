@@ -40,8 +40,8 @@ public class BaseController {
                 return;
             }
 
-            // TODO: try get headers
-
+            tryGetRequestHeaders(exchange, request);
+                
             TResponse response = action.execute(request);
             handleSuccess(exchange, response);
         } catch (Exception e) {
@@ -63,12 +63,29 @@ public class BaseController {
                 return;
             }
     
-            // TODO: try get headers
+            tryGetRequestHeaders(exchange, requestBody);
     
             TResponse response = action.execute(requestBody);
             handleSuccess(exchange, response);
         } catch (Exception e) {
             handleError(exchange, e);
+        }
+    }
+
+    private <TRequest> void tryGetRequestHeaders(HttpExchange exchange, TRequest request) throws Exception, IllegalAccessException {
+        try
+        {
+            var requestHeaders = request.getClass().getDeclaredField("headers");
+            if (requestHeaders != null)
+            {
+                var headers = getHeaders(exchange);
+                System.out.println("Headers\nLogin: " + headers.getLogin() + "\nSenha: " + headers.getPassword());
+                requestHeaders.set(request, headers);
+            }
+        }
+        catch (NoSuchFieldException e)
+        {
+            return;
         }
     }
 
