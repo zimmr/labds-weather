@@ -1,0 +1,62 @@
++--------+--------------------------------------------------------------------------------------------------------------+-------------+
+| ID     | REQUISITO                                                                                                    | PRIORIDADE  |
++--------+--------------------------------------------------------------------------------------------------------------+-------------+
+| REQ01  | O sistema deve permitir o cadastro de usuários com nome, e-mail e senha.                                     | Must Have   |
+| REQ02  | O sistema deve validar se o e-mail é único.                                                                  | Must Have   |
+| REQ03  | O sistema deve permitir login com e-mail e senha.                                                            | Must Have   |
+| REQ04  | O sistema deve validar as credenciais informadas.                                                            | Must Have   |
+| REQ05  | Após sucesso no login, o sistema deve recarregar a página com as preferências do usuário.                    | Must Have   |
+| REQ06  | O sistema deve permitir recuperação de senha via e-mail.                                                     | Must Have   |
+| REQ07  | O sistema deve permitir edição de dados do usuário.                                                          | Must Have   |
+| REQ08  | O sistema deve permitir exclusão da conta.                                                                   | Should Have |
+| REQ09  | O sistema deve permitir consultar o clima por cidade.                                                        | Must Have   |
+| REQ10  | O sistema deve consumir a API OpenWeather.                                                                   | Must Have   |
+| REQ11  | O sistema deve validar se cidade existe.                                                                     | Must Have   |
+| REQ12  | O sistema deve exibir a temperatura em Celsius por padrão.                                                   | Must Have   |
+| REQ13  | O sistema deve permitir que o usuário altere a unidade da temperatura.                                       | Should Have |
+| REQ14  | O sistema deve exibir a umidade do ar atual.                                                                 | Must Have   |
+| REQ15  | O sistema deve exibir a velocidade do vento atual.                                                           | Must Have   |
+| REQ16  | O sistema deve exibir a descrição do clima atual (ex: ensolarado, nublado).                                  | Must Have   |
+| REQ17  | O sistema deve exibir a probabilidade de chuva atual.                                                        | Must Have   |
+| REQ18  | O sistema deve exibir a sensação térmica atual.                                                              | Must Have   |
+| REQ19  | O sistema deve permitir visualizar previsão do tempo para 4 dias futuros.                                    | Must Have   |
+| REQ20  | O sistema deve registrar automaticamente as consultas realizadas pelo usuário com os detalhes obtidos.       | Must Have   |
+| REQ21  | O sistema deve registrar um log de consulta com dados básicos de cidade e horário da consulta.               | Must Have   |
+| REQ22  | O sistema deve permitir que usuários cadastrados salvem cidades como favoritas.                              | Must Have   |
+| REQ23  | O sistema deve permitir nomear cidades favoritas (ex: “Viagem”, “Casa”).                                     | Must Have   |
+| REQ24  | O sistema deve permitir editar as cidades favoritas.                                                         | Must Have   |
+| REQ25  | O sistema deve permitir excluir cidades favoritas.                                                           | Must Have   |
+| REQ26  | O sistema deve permitir filtrar cidades favoritas.                                                           | Must Have   |
+| REQ27  | O sistema deve exibir data e hora da consulta.                                                               | Must Have   |
+| REQ28  | O sistema deve permitir que o usuário visualize o seu histórico de pesquisa.                                 | Must Have   |
+| REQ29  | O sistema não deve permitir que um usuário visualize o histórico de outro.                                   | Must Have   |
+| REQ30  | O sistema deve permitir ordenar o histórico.                                                                 | Must Have   |
+| REQ31  | O sistema deve permitir limpar o histórico.                                                                  | Must Have   |
+| REQ32  | O sistema deve permitir exportar o histórico para CSV.                                                       | Should Have |
+| REQ33  | O sistema deve exibir o total de consultas realizadas.                                                       | Must Have   |
+| REQ34  | O sistema deve identificar a cidade mais consultada.                                                         | Must Have   |
+| REQ35  | O sistema deve apresentar gráfico de cidades consultadas.                                                    | Must Have   |
+| REQ36  | O sistema deve exibir estatísticas por período (dia, semana, mês).                                           | Must Have   |
+| REQ37  | O sistema deve tratar falhas na API OpenWeather.                                                             | Must Have   |
+| REQ38  | O sistema deve proteger dados sensíveis do usuário.                                                          | Must Have   |
+| REQ39  | O sistema deve impedir acesso não autorizado.                                                                | Must Have   |
+| REQ40  | O sistema deve permitir que o usuário encerre a sua sessão.                                                  | Must Have   |
++--------+--------------------------------------------------------------------------------------------------------------+-------------+
+
+REQUISITOS NÃO FUNCIONAIS
+
++--------+--------------------------------------------------------------------------------------------------------------+-------------+
+| ID     | REQUISITO                                                                                                    | PRIORIDADE  |
++--------+--------------------------------------------------------------------------------------------------------------+-------------+
+| REQ41  | O sistema deve criptografar a senha do usuário.                                                              | Must Have   |
+| REQ42  | O sistema deve manter a sessão ativa do usuário autenticado.                                                 | Must Have   |
+| REQ43  | O sistema deve exibir mensagens de erro amigáveis.                                                           | Should Have |
+| REQ44  | O sistema deve registrar logs de erro.                                                                       | Must Have   |
+| REQ45  | O sistema deve implementar cache de consultas recentes.                                                      | Should Have |
+| REQ46  | O sistema deve evitar requisições repetidas à API.                                                           | Must Have   |
+| REQ47  | O sistema deve implementar controle de sessão (timeout).                                                     | Should Have |
+| REQ48  | O sistema deve prevenir ataques comuns.                                                                      | Must Have   |
+| REQ49  | Exibir sugestões na barra de consulta.                                                                       | Could Have  |
+| REQ50  | Salvar preferência de unidade da sessão.                                                                     | Could Have  |
+| REQ51  | Salvar preferência de unidade do usuário.                                                                    | Should Have |
++--------+--------------------------------------------------------------------------------------------------------------+-------------+

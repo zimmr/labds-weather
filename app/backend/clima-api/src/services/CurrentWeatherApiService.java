@@ -27,12 +27,12 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
         enforceRequestLimit();
         saveLog(request);
 
-        // Regra 1.4 Não permitir espaços inválidos
+        // Regra Aula 1.4 Não permitir espaços inválidos
         String key = getFormattedQuery(request);
 
-        // Regra 2.3 - Controle de duplicidade: Não consultar API se já consultou antes
-        // Regra 4.1 - Cache inteligente: Antes de chamar API → verificar lista
-        // Regra 4.2 - Cache inteligente: se existir → usar dado local
+        // Regra Aula 2.3 - Controle de duplicidade: Não consultar API se já consultou antes
+        // Regra Aula 4.1 - Cache inteligente: Antes de chamar API → verificar lista
+        // Regra Aula 4.2 - Cache inteligente: se existir → usar dado local
         var cacheResult = cache.get(key);
         if (cacheResult != null)
         {
@@ -40,13 +40,13 @@ public class CurrentWeatherApiService extends BaseOpenWeatherApiService implemen
             return cacheResult;
         }
         
-        // Regra 4.3 - Cache inteligente: •se não → chamar API
+        // Regra Aula 4.3 - Cache inteligente: •se não → chamar API
         String path = domain + "?q=" + key + "&appid=" + apiKey;
 
         var result = JsonUtils.deserialize(sendRequest(path), CurrentWeatherDto.class);
             
-        // Regra 2.2 - Controle de duplicidade: Não salvar se já existir registro
-        // Regra 2.4 - Controle de duplicidade: Impedir duplicação na lista
+        // Regra Aula 2.2 - Controle de duplicidade: Não salvar se já existir registro
+        // Regra Aula 2.4 - Controle de duplicidade: Impedir duplicação na lista
         if (!cache.containsKey(key))
             cache.put(key, result);
 
