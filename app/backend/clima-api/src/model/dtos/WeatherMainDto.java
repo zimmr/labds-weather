@@ -1,6 +1,6 @@
 package model.dtos;
 
-public class CurrentWeatherMainDto {
+public class WeatherMainDto {
     // NOTA: é tudo em Kelvin
     public float temp;
     public float feels_like;

@@ -2,23 +2,23 @@ package controller;
 
 import com.sun.net.httpserver.HttpServer;
 
-import services.ICurrentWeatherApiService;
 import services.IFavoriteService;
+import services.IWeatherApiService;
 import services.IGeoApiService;
 import services.ISearchLogService;
 import services.IUserService;
 
 public class Router {
     
-    private CurrentWeatherController currentWeatherHandler;
+    private WeatherController currentWeatherHandler;
     private GeoController geoHandler;
     private UserController userHandler;
     private LogController logHandler;
     private FavoriteController favoriteHandler;
 
-    public Router(IGeoApiService geoApiService, ICurrentWeatherApiService currentWeatherApiService, IUserService userService, ISearchLogService searchLogService, IFavoriteService favoriteService) {
+    public Router(IGeoApiService geoApiService, IWeatherApiService weatherApiService, IUserService userService, ISearchLogService searchLogService, IFavoriteService favoriteService) {
         geoHandler = new GeoController(geoApiService);
-        currentWeatherHandler = new CurrentWeatherController(currentWeatherApiService);
+        currentWeatherHandler = new WeatherController(weatherApiService);
         userHandler = new UserController(userService);
         logHandler = new LogController(searchLogService);
         favoriteHandler = new FavoriteController(favoriteService);
