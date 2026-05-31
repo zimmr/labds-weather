@@ -11,7 +11,6 @@ public class User {
     private String password;
     private boolean useCelsius;
     // TODO: histórico
-    // TODO: favoritos
     // TODO: outros métodos
 
     public User() {}

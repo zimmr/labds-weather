@@ -11,6 +11,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 import controller.interfaces.Action;
 import controller.interfaces.NullRequestAction;
+import controller.interfaces.VoidAction;
 import model.requests.RequestHeaders;
 import model.responses.ErrorResponse;
 import utils.JsonUtils;
@@ -67,6 +68,28 @@ public class BaseController {
     
             TResponse response = action.execute(requestBody);
             handleSuccess(exchange, response);
+        } catch (Exception e) {
+            handleError(exchange, e);
+        }
+    }
+
+    // Método POST para actions que retornam void
+    protected <TRequest> void post(HttpExchange exchange, Class<TRequest> requestClass, VoidAction<TRequest> action, Function<TRequest, ErrorResponse> validation) throws IOException {
+        try {
+            InputStream inputStream = exchange.getRequestBody();
+            TRequest requestBody = getRequestBody(requestClass, inputStream);
+
+            var validationError = validation.apply(requestBody);
+            if (validationError != null)
+            {
+                setResponse(exchange, 400, JsonUtils.toJson(validationError).getBytes(StandardCharsets.UTF_8));
+                return;
+            }
+
+            tryGetRequestHeaders(exchange, requestBody);
+
+            action.execute(requestBody);
+            setResponse(exchange, 200, new byte[0]);
         } catch (Exception e) {
             handleError(exchange, e);
         }

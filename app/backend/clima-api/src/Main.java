@@ -1,12 +1,16 @@
 import com.sun.net.httpserver.HttpServer;
 import controller.Router;
+import repositories.IFavoriteRepository;
 import repositories.ISearchLogRepository;
 import repositories.IUserRepository;
+import repositories.FavoriteRepository;
 import repositories.SearchLogRepository;
 import repositories.UserRepository;
+import services.IFavoriteService;
 import services.IGeoApiService;
 import services.ISearchLogService;
 import services.IUserService;
+import services.FavoriteService;
 import services.SearchLogService;
 import services.UserService;
 import services.CurrentWeatherApiService;
@@ -33,7 +37,10 @@ public class Main {
         IUserRepository userRepository = new UserRepository();
         IUserService userService = new UserService(userRepository);
 
-        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService);
+        IFavoriteRepository favoriteRepository = new FavoriteRepository();
+        IFavoriteService favoriteService = new FavoriteService(favoriteRepository, userService);
+
+        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService, favoriteService);
 
         router.createContext(server);
 
