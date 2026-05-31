@@ -2,12 +2,12 @@ package model.requests.validation;
 
 import java.util.ArrayList;
 
-import model.requests.CurrentWeatherRequest;
+import model.requests.WeatherRequest;
 import model.responses.ErrorResponse;
 
-public class CurrentWeatherRequestValidator {
+public class WeatherRequestValidator {
 
-    public ErrorResponse validate(CurrentWeatherRequest request)
+    public ErrorResponse validate(WeatherRequest request)
     {
         ArrayList<String> errors = new ArrayList<String>();
 

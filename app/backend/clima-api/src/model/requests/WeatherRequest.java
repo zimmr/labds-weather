@@ -1,6 +1,6 @@
 package model.requests;
 
-public class CurrentWeatherRequest {
+public class WeatherRequest {
     public String city;
     public String state;
     public String country;

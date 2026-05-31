@@ -1,6 +1,6 @@
 package model.dtos;
 
-public class CurrentWeatherDescriptionDto {
+public class WeatherDescriptionDto {
     public int id;
     public String main;
     public String description;

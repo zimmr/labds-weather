@@ -13,9 +13,9 @@ import services.IUserService;
 import services.FavoriteService;
 import services.SearchLogService;
 import services.UserService;
-import services.CurrentWeatherApiService;
+import services.WeatherApiService;
 import services.GeoApiService;
-import services.ICurrentWeatherApiService;
+import services.IWeatherApiService;
 
 import java.net.InetSocketAddress;
 
@@ -32,7 +32,7 @@ public class Main {
         ISearchLogService searchLogService = new SearchLogService(searchLogRepository);
 
         IGeoApiService geoApiService = new GeoApiService();
-        ICurrentWeatherApiService currentWeatherApiService = new CurrentWeatherApiService(searchLogService);
+        IWeatherApiService currentWeatherApiService = new WeatherApiService(searchLogService);
         
         IUserRepository userRepository = new UserRepository();
         IUserService userService = new UserService(userRepository);
