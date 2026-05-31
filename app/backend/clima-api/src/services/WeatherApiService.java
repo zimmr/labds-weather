@@ -11,7 +11,9 @@ import model.dtos.WeatherForecastDto;
 import model.entities.City;
 import model.entities.SearchLog;
 import model.requests.WeatherRequest;
+import model.responses.WeatherResponse;
 import utils.JsonUtils;
+import utils.WeatherConditions;
 
 public class WeatherApiService extends BaseOpenWeatherApiService implements IWeatherApiService {
 
@@ -24,7 +26,7 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         this.searchLogService = searchLogService;
     }
 
-    public CurrentWeatherDto getCurrentWeather(WeatherRequest request) throws Exception {
+    public WeatherResponse getCurrentWeather(WeatherRequest request) throws Exception {
         
         enforceRequestLimit();
         saveLog(request);
@@ -39,7 +41,7 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         if (cacheResult != null)
         {
             System.out.println("Em cache: " + key);
-            return cacheResult;
+            return mapWeatherResponse(cacheResult);
         }
         
         // Regra Aula 4.3 - Cache inteligente: •se não → chamar API
@@ -52,7 +54,7 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         if (!cache.containsKey(key))
             cache.put(key, result);
 
-        return result;
+        return mapWeatherResponse(result);
     }
 
     public WeatherForecastDto getWeatherForecast(WeatherRequest request) throws Exception {
@@ -110,5 +112,19 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
 
         return URLEncoder.encode(query.toString(), StandardCharsets.UTF_8);
     }
-    
+
+    private WeatherResponse mapWeatherResponse(CurrentWeatherDto result) {
+        return new WeatherResponse(
+            result.main.temp,
+            result.main.feels_like,
+            result.main.temp_min,
+            result.main.temp_max,
+            result.main.humidity,
+            WeatherConditions.getDescription(result.weather.getFirst().id),
+            0,
+            0,
+            0,
+            result.dt
+        );
+    }
 }
