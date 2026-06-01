@@ -9,7 +9,9 @@ public class CurrentWeatherDto {
     public int dt;
     public int timezone;
     public int visibility;
+    public WeatherSysDto sys;
     public WeatherMainDto main;
     public List<WeatherDescriptionDto> weather;
+    public WeatherCloudsDto clouds;
+    public WeatherWindDto wind;
 }
-
