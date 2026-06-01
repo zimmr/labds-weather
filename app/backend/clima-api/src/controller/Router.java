@@ -10,25 +10,25 @@ import services.IUserService;
 
 public class Router {
     
-    private WeatherController currentWeatherHandler;
-    private GeoController geoHandler;
-    private UserController userHandler;
-    private LogController logHandler;
-    private FavoriteController favoriteHandler;
+    private WeatherController weatherController;
+    private GeoController geoController;
+    private UserController userController;
+    private LogController logController;
+    private FavoriteController favoriteController;
 
     public Router(IGeoApiService geoApiService, IWeatherApiService weatherApiService, IUserService userService, ISearchLogService searchLogService, IFavoriteService favoriteService) {
-        geoHandler = new GeoController(geoApiService);
-        currentWeatherHandler = new WeatherController(weatherApiService);
-        userHandler = new UserController(userService);
-        logHandler = new LogController(searchLogService);
-        favoriteHandler = new FavoriteController(favoriteService);
+        geoController = new GeoController(geoApiService);
+        weatherController = new WeatherController(weatherApiService);
+        userController = new UserController(userService);
+        logController = new LogController(searchLogService);
+        favoriteController = new FavoriteController(favoriteService);
     }
 
     public void createContext(HttpServer server) {
-        currentWeatherHandler.create(server);
-        geoHandler.create(server);
-        userHandler.create(server);
-        logHandler.create(server);
-        favoriteHandler.create(server);
+        weatherController.create(server);
+        geoController.create(server);
+        userController.create(server);
+        logController.create(server);
+        favoriteController.create(server);
     }
 }
