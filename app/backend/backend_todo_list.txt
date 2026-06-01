@@ -6,11 +6,11 @@ Back End TO DO List
 Tratar retorno para evitar redundâncias ??
 
 * GET weather/current                                 [V]
-Falta tratar retorno das unidades de medida.
-Tratar outros dados, descrição, etc.
-A temperatura vem em Kelvin, devemos converter para Fahrenheit e Celsius.
+* GET weather/forecast                                [V]
+Traduzir descrições
+Verificar se é preciso converter dados de umidade e velocidade do vento, etc
+Salvar histórico do usuário
 
-* GET weather/forecast                                [ ]
 * GET weather/combined                                [ ]
 A ideia é combinar as duas consultas em um retorno único,
 com todos os dados tratados.
