@@ -72,6 +72,40 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Weather Forecast",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/weather/forecast?city=Canoas&state=Rio Grande do Sul&country=BR",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "weather",
+                "forecast"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Canoas"
+                },
+                {
+                  "key": "state",
+                  "value": "Rio Grande do Sul"
+                },
+                {
+                  "key": "country",
+                  "value": "BR"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
