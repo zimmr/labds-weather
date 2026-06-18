@@ -59,18 +59,18 @@ Retornar favoritos.
 
 Logout poderá ser feito pelo front, apagando dados do cache que seriam enviados pelo header.
 
-* POST user/favorites                                 [ ]
+* POST user/favorites                                 [V]
 Salva um novo favoritos.
 Não permitir se o usuário já possuir 3 salvos.
 Autenticar.
-* GET user/favorites                                  [ ]
+* GET user/favorites                                  [V]
 Obtém favoritos do usuário.
 Autenticar.
-* PUT user/favorites                                  [ ]
+* PUT user/favorites                                  [V]
 Atualizar favoritos do usuário.
 Mesma lógica do PUT user.
 Autenticar.
-* DELETE user/favorites                               [ ]
+* DELETE user/favorites                               [V]
 Exclui um favorito do usuário.
 Autenticar.
 
