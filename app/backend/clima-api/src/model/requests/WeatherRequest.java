@@ -4,4 +4,5 @@ public class WeatherRequest {
     public String city;
     public String state;
     public String country;
+    public RequestHeaders headers;
 }
