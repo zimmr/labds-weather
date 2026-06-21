@@ -5,16 +5,19 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import model.dtos.CurrentWeatherDto;
 import model.dtos.WeatherForecastDto;
 import model.dtos.WeatherForecastItemDto;
 import model.entities.City;
+import model.entities.History;
 import model.entities.SearchLog;
 import model.requests.WeatherRequest;
 import model.responses.CurrentWeatherResponse;
 import model.responses.WeatherForecastResponse;
 import model.responses.WeatherResponse;
+import repositories.IHistoryRepository;
 import utils.JsonUtils;
 import utils.WeatherConditions;
 
@@ -24,9 +27,13 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
     private HashMap<String, CurrentWeatherDto> cache = new HashMap<>();
     private HashMap<String, WeatherForecastDto> forecastCache = new HashMap<>();
     private final ISearchLogService searchLogService;
+    private final IHistoryRepository historyRepository;
+    private final IUserService userService;
 
-    public WeatherApiService(ISearchLogService searchLogService) {
+    public WeatherApiService(ISearchLogService searchLogService, IHistoryRepository historyRepository, IUserService userService) {
         this.searchLogService = searchLogService;
+        this.historyRepository = historyRepository;
+        this.userService = userService;
     }
 
     public CurrentWeatherResponse getCurrentWeather(WeatherRequest request) throws Exception {
@@ -44,6 +51,7 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         if (cacheResult != null)
         {
             System.out.println("Em cache: " + key);
+            saveHistory(request, cacheResult);
             return mapWeatherResponse(cacheResult);
         }
         
@@ -56,6 +64,9 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         // Regra Aula 2.4 - Controle de duplicidade: Impedir duplicação na lista
         if (!cache.containsKey(key))
             cache.put(key, result);
+
+        // REQ20 - Salvar histórico do usuário autenticado
+        saveHistory(request, result);
 
         return mapWeatherResponse(result);
     }
@@ -96,6 +107,35 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         searchLogService.save(searchLog);
     }
 
+    /**
+     * REQ20 - Salva histórico automaticamente se o usuário estiver autenticado.
+     * A autenticação é não-obrigatória: se os headers estiverem vazios, não salva.
+     */
+    private void saveHistory(WeatherRequest request, CurrentWeatherDto result) {
+        try {
+            if (request.headers == null)
+                return;
+
+            var authResult = userService.authenticate(null, request.headers, false);
+            if (authResult.isAuthenticated) {
+                String searchData = result.main.temp + "°C, " + WeatherConditions.getDescription(result.weather.get(0).id);
+
+                var history = new History(
+                    authResult.user.getId(),
+                    request.city,
+                    request.state,
+                    request.country,
+                    0, 0,
+                    searchData
+                );
+                historyRepository.save(history);
+            }
+        } catch (Exception e) {
+            // Não quebrar a consulta se falhar ao salvar histórico
+            System.out.println("Erro ao salvar histórico: " + e.getMessage());
+        }
+    }
+
     private String getFormattedQuery(WeatherRequest request) {
         StringBuilder query = new StringBuilder();
         
@@ -126,13 +166,13 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
                 result.main.temp_min,
                 result.main.temp_max,
                 result.main.humidity,
-                WeatherConditions.getDescription(result.weather.getFirst().id),
+                WeatherConditions.getDescription(result.weather.get(0).id),
                 result.wind.speed,
                 result.wind.deg,
                 result.clouds.all,
                 result.timezone,
                 result.dt,
-                result.weather.getFirst().icon
+                result.weather.get(0).icon
             )
         );
     }
@@ -144,13 +184,13 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
             result.main.temp_min,
             result.main.temp_max,
             result.main.humidity,
-            WeatherConditions.getDescription(result.weather.getFirst().id),
+            WeatherConditions.getDescription(result.weather.get(0).id),
             result.wind.speed,
             result.wind.deg,
             result.clouds.all,
             timezone,
             result.dt,
-            result.weather.getFirst().icon
+            result.weather.get(0).icon
         );
     }
 
@@ -158,7 +198,7 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
         return new WeatherForecastResponse(
             result.city.name,
             result.city.country,
-            result.list.stream().map(item -> mapWeatherResponse(item, result.city.timezone)).toList()
+            result.list.stream().map(item -> mapWeatherResponse(item, result.city.timezone)).collect(Collectors.toList())
         );
     }
 }

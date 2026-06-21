@@ -16,6 +16,10 @@ import services.UserService;
 import services.WeatherApiService;
 import services.GeoApiService;
 import services.IWeatherApiService;
+import repositories.IHistoryRepository;
+import repositories.HistoryRepository;
+import services.IHistoryService;
+import services.HistoryService;
 
 import java.net.InetSocketAddress;
 
@@ -31,16 +35,19 @@ public class Main {
         ISearchLogRepository searchLogRepository = new SearchLogRepository();
         ISearchLogService searchLogService = new SearchLogService(searchLogRepository);
 
-        IGeoApiService geoApiService = new GeoApiService();
-        IWeatherApiService currentWeatherApiService = new WeatherApiService(searchLogService);
-        
         IUserRepository userRepository = new UserRepository();
         IUserService userService = new UserService(userRepository);
+
+        IHistoryRepository historyRepository = new HistoryRepository();
+        IHistoryService historyService = new HistoryService(historyRepository, userService);
+
+        IGeoApiService geoApiService = new GeoApiService();
+        IWeatherApiService currentWeatherApiService = new WeatherApiService(searchLogService, historyRepository, userService);
 
         IFavoriteRepository favoriteRepository = new FavoriteRepository();
         IFavoriteService favoriteService = new FavoriteService(favoriteRepository, userService);
 
-        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService, favoriteService);
+        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService, favoriteService, historyService);
 
         router.createContext(server);
 

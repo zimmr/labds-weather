@@ -130,19 +130,22 @@ public class BaseController {
     {
         Map<String, Object> queryParamsMap = new HashMap<String, Object>();
 
-        String[] queryParams = query.split("&");
+        // Só tenta processar se a query não for nula e não estiver vazia
+        if (query != null && !query.isBlank()) {
+            String[] queryParams = query.split("&");
 
-        for (String param : queryParams) {
-            var paramValuePair = param.split("=");
-            
-            var key = getValueFromArray(paramValuePair, 0);
+            for (String param : queryParams) {
+                var paramValuePair = param.split("=");
+                
+                var key = getValueFromArray(paramValuePair, 0);
             if (key == "headers") // impede de receber parâmetro 'headers' pela query
-                continue;
+                    continue;
 
-            var value = getValueFromArray(paramValuePair, 1);
+                var value = getValueFromArray(paramValuePair, 1);
 
-            if (key != null)
-                queryParamsMap.put(key.toString(), value);
+                if (key != null)
+                    queryParamsMap.put(key.toString(), value);
+            }
         }
 
         String queryParamsJson = JsonUtils.toJson(queryParamsMap);
