@@ -1,0 +1,67 @@
+<header class="header">
+  <div class="logo">
+    ☁️ LabDs Weather
+  </div>
+
+  <nav>
+    <a routerLink="/login">Login</a>
+    <a href="#">Perfil</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="busca-container">
+    <h1>Consultar Clima</h1>
+    <p>Busque por uma cidade para visualizar as condições climáticas.</p>
+
+    <div class="busca-box">
+      <input
+        type="text"
+        placeholder="Buscar cidade..."
+        [(ngModel)]="termoBusca"
+        (keyup.enter)="buscar()">
+
+      <button (click)="buscar()">
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <div class="cards" *ngIf="pesquisou && cidades.length > 0">
+
+    <div
+      class="card"
+      *ngFor="let cidade of cidades">
+
+      <div class="card-top">
+        <div>
+          <h2>{{ cidade.nome }}</h2>
+          <span>{{ cidade.pais }}</span>
+        </div>
+
+        <div class="icone">
+          {{ cidade.icone }}
+        </div>
+      </div>
+
+      <div class="temperatura">
+        {{ cidade.temperatura }}°C
+      </div>
+
+      <div class="descricao">
+        {{ cidade.descricao }}
+      </div>
+
+    </div>
+
+  </div>
+  <div
+  class="nenhum-resultado"
+  *ngIf="pesquisou && cidades.length === 0">
+
+  Nenhuma cidade encontrada.
+
+</div>
+
+</div>
