@@ -18,7 +18,8 @@ public class WeatherResponse {
     public float humidity;
     public String description;
 
-    public float windSpeed;
+    public float windSpeedMS;
+    public float windSpeedKmH;
     public float windAngle;
     public float clouds;
 
@@ -28,25 +29,31 @@ public class WeatherResponse {
 
     public WeatherResponse(float temp, float feelsLike, float tempMin, float tempMax, float humidity, String description, float windSpeed, float windAngle, float clouds, int timezone, long date, String icon) {
         this.tempC = temp;
-        this.tempF = celsiusToFahrenheit(temp);
+        this.tempF = toFahrenheit(temp);
         this.feelsLikeC = feelsLike;
-        this.feelsLikeF = celsiusToFahrenheit(feelsLike);
+        this.feelsLikeF = toFahrenheit(feelsLike);
         this.tempMinC = tempMin;
         this.tempMaxC = tempMax;
-        this.tempMinF = celsiusToFahrenheit(tempMin);
-        this.tempMaxF = celsiusToFahrenheit(tempMax);
+        this.tempMinF = toFahrenheit(tempMin);
+        this.tempMaxF = toFahrenheit(tempMax);
         this.humidity = humidity;
         this.description = description;
-        this.windSpeed = windSpeed;
+        this.windSpeedMS = windSpeed;
+        this.windSpeedKmH = toKmh(windSpeed);
         this.windAngle = windAngle;
         this.clouds = clouds;
         this.date = Instant.ofEpochSecond(date).atOffset(ZoneOffset.ofTotalSeconds(timezone)).toLocalDateTime();
         this.icon = icon;
     }
 
-    public float celsiusToFahrenheit(float tempC)
+    public float toFahrenheit(float temperatureInCelsius)
     {
-        return tempC * 9 / 5 + 32;
+        return temperatureInCelsius * 9 / 5 + 32;
+    }
+
+    public float toKmh(float speedInMs)
+    {
+        return speedInMs * 3.6f;
     }
 }
 
