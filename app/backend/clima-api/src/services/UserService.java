@@ -12,6 +12,7 @@ import model.requests.GetUserRequest;
 import model.requests.RequestHeaders;
 import model.requests.UserLoginRequest;
 import model.requests.UserRequest;
+import model.responses.UserResponse;
 import repositories.IUserRepository;
 
 public class UserService extends BaseService implements IUserService {
@@ -62,7 +63,7 @@ public class UserService extends BaseService implements IUserService {
         return user;
     }
 
-    public User login(UserLoginRequest request) throws MalformedURLException, IOException, Exception {
+    public UserResponse login(UserLoginRequest request) throws MalformedURLException, IOException, Exception {
         enforceRequestLimit();
 
         User user = repository.getByEmail(request.email);
@@ -75,7 +76,7 @@ public class UserService extends BaseService implements IUserService {
         if (!isAuthenticated)
             throw new Exception();
             
-        return user;
+        return new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getUseCelsius());
     }
 
     /**
