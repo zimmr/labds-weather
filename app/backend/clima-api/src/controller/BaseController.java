@@ -176,8 +176,20 @@ public class BaseController {
     }
 
     private void setResponse(HttpExchange exchange, int statusCode, byte[] responseBytes) throws IOException {
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:4200");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+
         exchange.sendResponseHeaders(statusCode, responseBytes.length);
         exchange.getResponseBody().write(responseBytes);
         exchange.getResponseBody().close();
+    }
+
+    protected void handleOptions(HttpExchange exchange) throws IOException {
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:4200");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+        exchange.sendResponseHeaders(200, -1);
+        exchange.close();
     }
 }

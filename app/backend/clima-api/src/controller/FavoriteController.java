@@ -41,6 +41,9 @@ public class FavoriteController extends BaseController {
                 case "DELETE":
                     post(exchange, DeleteFavoriteRequest.class, favoriteService::delete, deleteFavoriteValidator::validate);
                     break;
+                case "OPTIONS":
+                    handleOptions(exchange);
+                    break;
                 default:
                     exchange.sendResponseHeaders(405, -1);
                     exchange.close();

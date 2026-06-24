@@ -29,6 +29,9 @@ public class HistoryController extends BaseController {
                 case "DELETE":
                     post(exchange, DeleteHistoryRequest.class, historyService::deleteByUser, deleteHistoryValidator::validate);
                     break;
+                case "OPTIONS":
+                    handleOptions(exchange);
+                    break;
                 default:
                     exchange.sendResponseHeaders(405, -1);
                     exchange.close();

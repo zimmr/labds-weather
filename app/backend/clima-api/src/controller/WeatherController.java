@@ -25,6 +25,9 @@ public class WeatherController extends BaseController {
                     case "GET":
                         get(exchange, WeatherRequest.class, weatherApiService::getCurrentWeather, currentWeatherRequestValidator::validate);
                         break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
+                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();
@@ -39,6 +42,9 @@ public class WeatherController extends BaseController {
                     case "GET":
                         get(exchange, WeatherRequest.class, weatherApiService::getWeatherForecast, currentWeatherRequestValidator::validate);
                         break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
+                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();
@@ -52,6 +58,9 @@ public class WeatherController extends BaseController {
                 switch (method) {
                     case "GET":
                         get(exchange, WeatherRequest.class, weatherApiService::getCombinedWeather, currentWeatherRequestValidator::validate);
+                        break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
                         break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
