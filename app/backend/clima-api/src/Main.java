@@ -9,9 +9,11 @@ import repositories.UserRepository;
 import services.IFavoriteService;
 import services.IGeoApiService;
 import services.ISearchLogService;
+import services.IStatisticsService;
 import services.IUserService;
 import services.FavoriteService;
 import services.SearchLogService;
+import services.StatisticsService;
 import services.UserService;
 import services.WeatherApiService;
 import services.GeoApiService;
@@ -47,7 +49,9 @@ public class Main {
         IFavoriteRepository favoriteRepository = new FavoriteRepository();
         IFavoriteService favoriteService = new FavoriteService(favoriteRepository, userService);
 
-        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService, favoriteService, historyService);
+        IStatisticsService statisticsService = new StatisticsService(searchLogRepository);
+
+        router = new Router(geoApiService, currentWeatherApiService, userService, searchLogService, favoriteService, historyService, statisticsService);
 
         router.createContext(server);
 

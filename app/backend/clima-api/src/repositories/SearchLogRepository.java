@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
+import model.dtos.CityCount;
 import model.entities.City;
 import model.entities.SearchLog;
 import utils.MySqlConnection;
@@ -67,6 +69,91 @@ public class SearchLogRepository implements ISearchLogRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar log: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public List<CityCount> getTopCities(LocalDate since, int limit) {
+        String sql;
+        boolean hasDateFilter = since != null;
+
+        if (hasDateFilter) {
+            sql = """
+                SELECT cidade, estado, pais, COUNT(*) as total
+                  FROM Log
+                 WHERE data_consulta >= ?
+                 GROUP BY cidade, estado, pais
+                 ORDER BY total DESC
+                 LIMIT ?
+                """;
+        } else {
+            sql = """
+                SELECT cidade, estado, pais, COUNT(*) as total
+                  FROM Log
+                 GROUP BY cidade, estado, pais
+                 ORDER BY total DESC
+                 LIMIT ?
+                """;
+        }
+
+        List<CityCount> result = new ArrayList<>();
+
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            if (hasDateFilter) {
+                stmt.setDate(1, Date.valueOf(since));
+                stmt.setInt(2, limit);
+            } else {
+                stmt.setInt(1, limit);
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    result.add(new CityCount(
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("pais"),
+                        rs.getInt("total")
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar cidades mais pesquisadas: " + e.getMessage(), e);
+        }
+
+        return result;
+    }
+
+    @Override
+    public int getTotalSearches(LocalDate since) {
+        String sql;
+        boolean hasDateFilter = since != null;
+
+        if (hasDateFilter) {
+            sql = "SELECT COUNT(*) as total FROM Log WHERE data_consulta >= ?";
+        } else {
+            sql = "SELECT COUNT(*) as total FROM Log";
+        }
+
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            if (hasDateFilter) {
+                stmt.setDate(1, Date.valueOf(since));
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao contar total de pesquisas: " + e.getMessage(), e);
+        }
+
+        return 0;
     }
 
 
