@@ -24,6 +24,9 @@ public class StatisticsController extends BaseController {
                     case "GET":
                         get(exchange, StatisticsRequest.class, statisticsService::getStatistics, statisticsRequestValidator::validate);
                         break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
+                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();
