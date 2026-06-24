@@ -1,11 +1,11 @@
 # Angular (frontend/weather-app)
-*/node_modules/
-*/dist/
-*/.angular/
-*/coverage/
-*/tmp/
-*/.env
-*/.env.*
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+**/tmp/
+**/.env
+**/.env.*
 # VS Code settings (opcional)
 */.vscode/
 # macOS
