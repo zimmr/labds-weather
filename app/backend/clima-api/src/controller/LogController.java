@@ -21,6 +21,9 @@ public class LogController extends BaseController {
                     case "GET":
                         get(exchange, searchLogService::getAll);
                         break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
+                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();

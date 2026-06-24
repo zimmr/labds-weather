@@ -24,6 +24,9 @@ public class GeoController extends BaseController {
                     case "GET":
                         get(exchange, GeoRequest.class, geoApiService::searchByName, geoRequestValidator::validate);
                         break;
+                    case "OPTIONS":
+                        handleOptions(exchange);
+                        break;
                     default:
                         exchange.sendResponseHeaders(405, -1);
                         exchange.close();

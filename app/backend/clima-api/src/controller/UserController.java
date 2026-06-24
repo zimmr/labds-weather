@@ -32,6 +32,9 @@ public class UserController extends BaseController {
                 case "POST":
                     post(exchange, UserRequest.class, userService::save, userRequestValidator::validate);
                     break;
+                case "OPTIONS":
+                    handleOptions(exchange);
+                    break;
                 default:
                     exchange.sendResponseHeaders(405, -1);
                     exchange.close();
@@ -44,6 +47,9 @@ public class UserController extends BaseController {
                 switch (method) {
                 case "POST":
                     post(exchange, UserLoginRequest.class, userService::login, userLoginRequestValidator::validate);
+                    break;
+                case "OPTIONS":
+                    handleOptions(exchange);
                     break;
                 default:
                     exchange.sendResponseHeaders(405, -1);
