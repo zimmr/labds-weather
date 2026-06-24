@@ -25,7 +25,9 @@
           <input
             type="email"
             class="form-control"
-            placeholder="seu@email.com">
+            [(ngModel)]="email"
+            name="email"
+            placeholder="seu@email.com">     
         </div>
       </div>
 
@@ -40,11 +42,13 @@
           <input
             type="password"
             class="form-control"
+            [(ngModel)]="password"
+            name="password"
             placeholder="********">
         </div>
       </div>
 
-      <button class="btn btn-primary w-100 login-btn">
+      <button class="btn btn-primary w-100 login-btn" (click)="login()">
         Entrar
       </button>
 
