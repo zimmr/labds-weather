@@ -14,6 +14,7 @@ import model.entities.City;
 import model.entities.History;
 import model.entities.SearchLog;
 import model.requests.WeatherRequest;
+import model.responses.CombinedWeatherResponse;
 import model.responses.CurrentWeatherResponse;
 import model.responses.WeatherForecastResponse;
 import model.responses.WeatherResponse;
@@ -100,6 +101,14 @@ public class WeatherApiService extends BaseOpenWeatherApiService implements IWea
             forecastCache.put(key, result);
 
         return mapWeatherForecastResponse(result);
+    }
+
+    public CombinedWeatherResponse getCombinedWeather(WeatherRequest request) throws Exception
+    {
+        var currentWeahter = getCurrentWeather(request);
+        var forecast = getWeatherForecast(request);
+
+        return new CombinedWeatherResponse(currentWeahter, forecast);
     }
 
     private void saveLog(WeatherRequest request) throws MalformedURLException, IOException, Exception {
