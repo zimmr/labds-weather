@@ -30,6 +30,9 @@ create table Historico(
     references Usuario(id_User)
 );
 
+ALTER TABLE Historico
+MODIFY COLUMN data_consulta datetime NOT NULL;
+
 create table Favoritos(
 	id_fave varchar(50) NOT NULL PRIMARY KEY,
     user_id varchar(50) NOT NULL,

@@ -26,7 +26,6 @@ export class Login {
 
     this.userService.login(this.email, this.password).subscribe({
       next: (res) => {
-        console.log(res);
 
         localStorage.setItem('login', this.email);
         localStorage.setItem('password', this.password);
