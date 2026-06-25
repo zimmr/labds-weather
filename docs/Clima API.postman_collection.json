@@ -106,12 +106,312 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Combined Weather",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "login",
+                "value": "joao5@oemail.com.br",
+                "type": "text"
+              },
+              {
+                "key": "password",
+                "value": "1235",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/weather?city=Canoas&state=Rio Grande do Sul&country=BR",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "weather"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Canoas"
+                },
+                {
+                  "key": "state",
+                  "value": "Rio Grande do Sul"
+                },
+                {
+                  "key": "country",
+                  "value": "BR"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
     {
       "name": "user",
       "item": [
+        {
+          "name": "favorites",
+          "item": [
+            {
+              "name": "Get User Favorites",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/favorites",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Post User Favorite",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"cityName\": \"Canoas\",\r\n    \"country\": \"BR\",\r\n    \"title\": \"Casa\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/favorites",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Put User Favorite",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": \"3b83637b-734a-43c3-91fb-ec74fd38220b\",\r\n    \"cityName\": \"Canoas\",\r\n    \"country\": \"BR\",\r\n    \"title\": \"CASA\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/favorites",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete User Favorite",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": \"3b83637b-734a-43c3-91fb-ec74fd38220b\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/favorites",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "history",
+          "item": [
+            {
+              "name": "Get User History",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/history",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "history"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete User History",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "login",
+                    "value": "joao5@oemail.com.br",
+                    "type": "text"
+                  },
+                  {
+                    "key": "password",
+                    "value": "1235",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/user/history",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "user",
+                    "history"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
         {
           "name": "Post User",
           "request": {
@@ -147,7 +447,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"joao5@email.com.br\",\r\n    \"password\": \"1235\"\r\n}",
+              "raw": "{\r\n    \"email\": \"joao5@oemail.com.br\",\r\n    \"password\": \"1235\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -179,7 +479,7 @@
             "header": [
               {
                 "key": "login",
-                "value": "joao5@email.com.br",
+                "value": "joao5@oemail.com.br",
                 "type": "text"
               },
               {
@@ -236,6 +536,60 @@
               "port": "8080",
               "path": [
                 "logs"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "statistics",
+      "item": [
+        {
+          "name": "Get Statistics",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/statistics?period=day",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "statistics"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "day"
+                },
+                {
+                  "key": "period",
+                  "value": "month",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "period",
+                  "value": "week",
+                  "type": "text",
+                  "disabled": true
+                }
               ]
             }
           },
